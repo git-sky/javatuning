@@ -18,6 +18,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>amino</groupId>
+            <artifactId>amino-cbbs</artifactId>
+            <version>0.3.1</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/src/main/resources/lib/amino-cbbs-0.3.1.jar
+            </systemPath>
+        </dependency>
+        <dependency>
             <groupId>antlr</groupId>
             <artifactId>antlr</artifactId>
             <version>2.7.6</version>
