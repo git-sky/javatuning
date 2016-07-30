@@ -7,7 +7,7 @@
     <groupId>com.github.jengo</groupId>
     <artifactId>javatuning</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <properties>
         <maven-resources-plugin.version>2.5</maven-resources-plugin.version>
