@@ -2,10 +2,10 @@ package javatuning.ch2.decorator;
 
 public abstract class PacketDecorator implements IPacketCreator {
 
-    IPacketCreator componet;
+    IPacketCreator component;
 
     public PacketDecorator(IPacketCreator c) {
-        componet = c;
+        component = c;
     }
 
 }

@@ -8,10 +8,10 @@ public class PacketHTTPHeaderCreator extends PacketDecorator {
 
     @Override
     public String handleContent() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("Cache-Control:no-cache\n");
         sb.append("Date:Mon,31Dec201204:25:57GMT\n");
-        sb.append(componet.handleContent());
+        sb.append(component.handleContent());
         return sb.toString();
     }
 
