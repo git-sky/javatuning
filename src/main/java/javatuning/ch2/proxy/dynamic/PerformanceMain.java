@@ -56,19 +56,17 @@ public class PerformanceMain {
     }
 
     public static IDBQuery createJdkProxy() {
-        IDBQuery jdkProxy = (IDBQuery) Proxy.newProxyInstance(
+        return (IDBQuery) Proxy.newProxyInstance(
                 ClassLoader.getSystemClassLoader(),
                 new Class[]{IDBQuery.class},
-                new JdkDbQeuryHandler());
-        return jdkProxy;
+                new JdkDbQueryHandler());
     }
 
     public static IDBQuery createCglibProxy() {
         Enhancer enhancer = new Enhancer();
         enhancer.setCallback(new CglibDbQueryInterceptor());
         enhancer.setInterfaces(new Class[]{IDBQuery.class});
-        IDBQuery cglibProxy = (IDBQuery) enhancer.create();
-        return cglibProxy;
+        return (IDBQuery) enhancer.create();
     }
 
     public static IDBQuery createJavassistDynProxy() throws Exception {
@@ -87,10 +85,14 @@ public class PerformanceMain {
         mCtc.addConstructor(CtNewConstructor.defaultConstructor(mCtc));
         mCtc.addField(CtField.make("public " + IDBQuery.class.getName() + " real;", mCtc));
         String dbqueryname = DBQuery.class.getName();
-        mCtc.addMethod(CtNewMethod.make("public String request() { if(real==null)real=new " + dbqueryname + "();return real.request(); }", mCtc));
+        mCtc.addMethod(CtNewMethod.make(
+                        "public String request() { if(real==null)real=new "
+                                + dbqueryname
+                                + "();return real.request(); }",
+                        mCtc)
+        );
         Class pc = mCtc.toClass();
-        IDBQuery bytecodeProxy = (IDBQuery) pc.newInstance();
-        return bytecodeProxy;
+        return (IDBQuery) pc.newInstance();
     }
 
 }

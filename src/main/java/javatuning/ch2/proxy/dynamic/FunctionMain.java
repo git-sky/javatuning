@@ -18,29 +18,30 @@ public class FunctionMain {
         IDBQuery d = null;
         d = createJdkProxy();
         System.out.println(d.request());
+        System.out.println("---------");
         d = createCglibProxy();
         System.out.println(d.request());
+        System.out.println("---------");
         d = createJavassistDynProxy();
         System.out.println(d.request());
+        System.out.println("---------");
         d = createJavassistBytecodeDynamicProxy();
         System.out.println(d.request());
     }
 
     public static IDBQuery createJdkProxy() {
-        IDBQuery jdkProxy = (IDBQuery) Proxy.newProxyInstance(
+        return (IDBQuery) Proxy.newProxyInstance(
                 ClassLoader.getSystemClassLoader(),
                 new Class[]{IDBQuery.class},
-                new JdkDbQeuryHandler()
+                new JdkDbQueryHandler()
         );
-        return jdkProxy;
     }
 
     public static IDBQuery createCglibProxy() {
         Enhancer enhancer = new Enhancer();
         enhancer.setCallback(new CglibDbQueryInterceptor());
         enhancer.setInterfaces(new Class[]{IDBQuery.class});
-        IDBQuery cglibProxy = (IDBQuery) enhancer.create();
-        return cglibProxy;
+        return (IDBQuery) enhancer.create();
     }
 
     public static IDBQuery createJavassistDynProxy() throws Exception {
@@ -59,10 +60,14 @@ public class FunctionMain {
         mCtc.addConstructor(CtNewConstructor.defaultConstructor(mCtc));
         mCtc.addField(CtField.make("public " + IDBQuery.class.getName() + " real;", mCtc));
         String dbqueryname = DBQuery.class.getName();
-        mCtc.addMethod(CtNewMethod.make("public String request() { if(real==null)real=new " + dbqueryname + "();return real.request(); }", mCtc));
+        mCtc.addMethod(CtNewMethod.make(
+                        "public String request() { if(real==null)real=new "
+                                + dbqueryname
+                                + "();return real.request(); }",
+                        mCtc)
+        );
         Class pc = mCtc.toClass();
-        IDBQuery bytecodeProxy = (IDBQuery) pc.newInstance();
-        return bytecodeProxy;
+        return (IDBQuery) pc.newInstance();
     }
 
 }
