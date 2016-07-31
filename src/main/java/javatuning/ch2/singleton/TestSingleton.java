@@ -4,13 +4,12 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class TestSingleton {
 
-    //@Test
+    @Test
     public void test() {
         Singleton s = Singleton.getInstance();
         Singleton s1 = null;
@@ -20,48 +19,41 @@ public class TestSingleton {
             cons = singletonClass.getDeclaredConstructor(null);
             cons.setAccessible(true);
             s1 = (Singleton) cons.newInstance(null);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         Assert.assertNotSame(s, s1);
     }
 
-    public static class AccessSingletonThread extends Thread {
-        long begintime;
 
-        public AccessSingletonThread(long begintime) {
-            this.begintime = begintime;
+    public static class AccessSingletonThread extends Thread {
+        long begTime;
+
+        public AccessSingletonThread(long begTime) {
+            this.begTime = begTime;
         }
 
         @Override
         public void run() {
             System.out.println("try to get instance");
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 100000; i++) {
                 //Singleton.getInstance();
                 LazySingleton.getInstance();
-            System.out.println("spend:" + (System.currentTimeMillis() - begintime));
+            }
+            System.out.println("spend:" + (System.currentTimeMillis() - begTime));
         }
     }
 
-    //@Test
+
+    @Test
     public void testPerformance() throws InterruptedException {
         ExecutorService exe = Executors.newFixedThreadPool(5);
-        long begintime = System.currentTimeMillis();
-        exe.submit(new AccessSingletonThread(begintime));
-        exe.submit(new AccessSingletonThread(begintime));
-        exe.submit(new AccessSingletonThread(begintime));
-        exe.submit(new AccessSingletonThread(begintime));
-        exe.submit(new AccessSingletonThread(begintime));
+        long begTime = System.currentTimeMillis();
+        exe.submit(new AccessSingletonThread(begTime));
+        exe.submit(new AccessSingletonThread(begTime));
+        exe.submit(new AccessSingletonThread(begTime));
+        exe.submit(new AccessSingletonThread(begTime));
+        exe.submit(new AccessSingletonThread(begTime));
 
         Thread.sleep(10000);
     }

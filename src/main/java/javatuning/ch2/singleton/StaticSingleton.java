@@ -8,6 +8,10 @@ public class StaticSingleton {
 
     private static class SingletonHolder {
         private static StaticSingleton instance = new StaticSingleton();
+
+        private SingletonHolder() {
+            System.out.println("init SingletonHolder");
+        }
     }
 
     public static StaticSingleton getInstance() {

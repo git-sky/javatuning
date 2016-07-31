@@ -14,12 +14,13 @@ public class HoldLockMain {
         }
     }
 
-
     public static class HoldLockTask implements Runnable {
         private int i;
+        private String name;
 
-        public HoldLockTask(int i) {
+        public HoldLockTask(int i, String name) {
             this.i = i;
+            this.name = name;
         }
 
         @Override
@@ -27,20 +28,25 @@ public class HoldLockMain {
             try {
                 while (true) {
                     synchronized (lock[i]) {
-                        if (i % 2 == 0)
-                            lock[i].wait(r.nextInt(10));
-                        else
+                        if (i % 2 == 0) {
+                            int waitMills = r.nextInt(10);
+                            System.out.println("Task" + name + " occupy resource lock[" + i + "] for" + waitMills + "ms");
+                            lock[i].wait(waitMills);
+                        } else {
                             lock[i].notifyAll();
+                            System.out.println("Task" + name + " notifyAll for resource lock[" + i + "]");
+                        }
                     }
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
 
     public static void main(String[] args) {
         for (int i = 0; i < lock.length * 2; i++) {
-            new Thread(new HoldLockTask(i / 2)).start();
+            new Thread(new HoldLockTask(i / 2, String.valueOf(i))).start();
         }
     }
 

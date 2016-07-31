@@ -5,7 +5,7 @@ public class SerSingleton implements java.io.Serializable {
     String name;
 
     private SerSingleton() {
-        System.out.println("Singleton is create");
+        System.out.println("SerSingleton is create");
         name = "SerSingleton";
     }
 
