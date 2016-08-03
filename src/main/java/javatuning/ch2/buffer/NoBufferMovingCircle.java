@@ -10,10 +10,12 @@ public class NoBufferMovingCircle extends JApplet implements Runnable {
     int x = 5;
     int move = 1;
 
+    @Override
     public void init() {
         screenImage = createImage(230, 160);
     }
 
+    @Override
     public void start() {
         if (thread == null) {
             thread = new Thread(this);
@@ -21,16 +23,19 @@ public class NoBufferMovingCircle extends JApplet implements Runnable {
         }
     }
 
+    @Override
     public void run() {
         try {
             while (true) {
                 x += move;
-                if ((x > 105) || (x < 5))
+                if ((x > 105) || (x < 5)) {
                     move *= -1;
+                }
                 repaint();
                 Thread.sleep(10);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -42,6 +47,7 @@ public class NoBufferMovingCircle extends JApplet implements Runnable {
         g.fillOval(x, 5, 90, 90);
     }
 
+    @Override
     public void paint(Graphics g) {
         g.setColor(Color.white);
         g.fillRect(0, 0, 200, 100);

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class TestEHCacheUtil {
 
-    //@Test
+    @Test
     public void test1() throws InterruptedException {
         EHCacheUtil.put("cache1", "key1", "value1");
         System.out.println(EHCacheUtil.get("cache1", "key1"));

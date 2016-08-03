@@ -28,8 +28,7 @@ public class CglibHeavyMethodInterceptor implements MethodInterceptor {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(HeavyMethodDemo.class);
         enhancer.setCallback(new CglibHeavyMethodInterceptor());
-        HeavyMethodDemo cglibProxy = (HeavyMethodDemo) enhancer.create();
-        return cglibProxy;
+        return (HeavyMethodDemo) enhancer.create();
     }
 
     public static HeavyMethodDemo newHeavyMethod() {
@@ -39,14 +38,16 @@ public class CglibHeavyMethodInterceptor implements MethodInterceptor {
     public static void main(String args[]) {
         HeavyMethodDemo m = newCacheHeavyMethod();
         long begin = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++)
+        for (int i = 0; i < 100000; i++) {
             m.heavyMethod(2147483646);
+        }
         System.out.println("cache method spend:" + (System.currentTimeMillis() - begin));
 
         m = newHeavyMethod();
         begin = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++)
+        for (int i = 0; i < 100000; i++) {
             m.heavyMethod(2147483646);
+        }
         System.out.println("no cache method spend:" + (System.currentTimeMillis() - begin));
     }
 

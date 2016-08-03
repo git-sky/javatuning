@@ -1,15 +1,13 @@
 package javatuning.ch2.buffer;
 
-
 public class HeavyMethodDemo {
 
     public String heavyMethod(int num) {
         int i;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         boolean flag = false;
         for (i = 2; i <= num; i++) {
-
-            if (flag == true) {
+            if (flag) {
                 sb.append("*");
                 flag = false;
             }
@@ -19,7 +17,7 @@ public class HeavyMethodDemo {
                 num = num / i;
                 while (num % i == 0) {
                     num = num / i;
-                    if (flag == true) {
+                    if (flag) {
                         sb.append("*");
                         flag = false;
                     }
@@ -31,6 +29,7 @@ public class HeavyMethodDemo {
         return sb.toString();
     }
 
+    @Deprecated
     public static void main(String[] args) {
         HeavyMethodDemo y = new HeavyMethodDemo();
         System.out.println(y.heavyMethod(100));

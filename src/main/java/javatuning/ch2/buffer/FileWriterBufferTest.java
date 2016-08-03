@@ -14,24 +14,26 @@ public class FileWriterBufferTest {
 
     @Test
     public void testFileWriter() throws IOException {
-        Writer writer = new FileWriter(new File("file.txt"));
-        long begin = System.currentTimeMillis();
+        Writer writer = new FileWriter(new File("data/file.txt"));
+        long beg = System.currentTimeMillis();
         for (int i = 0; i < CIRCLE; i++) {
             writer.write(i);
         }
         writer.close();
-        System.out.println("testFileWriter spend:" + (System.currentTimeMillis() - begin));
+        long end = System.currentTimeMillis();
+        System.out.println("testFileWriter spend:" + (end - beg) + "ms");
     }
 
     @Test
     public void testFileWriterBuffer() throws IOException {
-        Writer writer = new BufferedWriter(new FileWriter(new File("file.txt")));
-        long begin = System.currentTimeMillis();
+        Writer writer = new BufferedWriter(new FileWriter(new File("data/file.txt")));
+        long beg = System.currentTimeMillis();
         for (int i = 0; i < CIRCLE; i++) {
             writer.write(i);
         }
         writer.close();
-        System.out.println("testFileWriterBuffer spend:" + (System.currentTimeMillis() - begin));
+        long end = System.currentTimeMillis();
+        System.out.println("testFileWriterBuffer spend:" + (end - beg) + "ms");
     }
 
 }

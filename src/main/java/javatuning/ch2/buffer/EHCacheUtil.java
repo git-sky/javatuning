@@ -4,13 +4,12 @@ import net.sf.ehcache.CacheException;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 public class EHCacheUtil {
 
     static CacheManager manager = null;
-    static String configfile = "javatuning/ch2/buffer/ehcache.xml";
+    static String configfile = "ehcache.xml";
 
     static {
         try {
@@ -30,9 +29,7 @@ public class EHCacheUtil {
             Element e = manager.getCache(cachename).get(key);
             if (e == null) return null;
             return e.getValue();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (CacheException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -41,15 +38,18 @@ public class EHCacheUtil {
     public static void clearCache(String cachename) {
         try {
             manager.getCache(cachename).removeAll();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void remove(String cachename, Serializable key) {
         manager.getCache(cachename).remove(key);
+    }
+
+    public static void main(String[] args) {
+        EHCacheUtil ehCacheUtil = new EHCacheUtil();
+        System.out.println(manager.getCache("cache1"));
     }
 
 }
