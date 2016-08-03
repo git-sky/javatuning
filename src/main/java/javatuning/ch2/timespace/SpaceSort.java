@@ -25,34 +25,39 @@ public class SpaceSort {
             }
         }
         System.arraycopy(a, 0, old, 0, a.length);
-        long start = System.currentTimeMillis();
+        long beg = System.currentTimeMillis();
         Arrays.sort(a);
-        System.out.println("Arrays.sort spend:" + (System.currentTimeMillis() - start) + " ms");
+        long end = System.currentTimeMillis();
+        System.out.println("Arrays.sort spend:" + (end - beg) + " ms");
         // outputArray(a);
         System.arraycopy(old, 0, a, 0, old.length);
-        start = System.currentTimeMillis();
+        beg = System.currentTimeMillis();
         spaceToTime(a);
-        System.out.println("spaceToTime spend:" + (System.currentTimeMillis() - start) + " ms");
+        end = System.currentTimeMillis();
+        System.out.println("spaceToTime spend:" + (end - beg) + " ms");
         // outputArray(a);
     }
 
     public static void outputArray(int[] a) {
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i] + " ");
+        for (int anA : a) {
+            System.out.print(anA + " ");
         }
         System.out.println();
     }
 
     public static void spaceToTime(int[] array) {
         int i = 0;
-        int max = array[0];
+        int max = array[i];
         int l = array.length;
-        for (i = 1; i < l; i++)
-            if (array[i] > max)
+        for (i = 1; i < l; i++) {
+            if (array[i] > max) {
                 max = array[i];
+            }
+        }
         int[] temp = new int[max + 1];
-        for (i = 0; i < l; i++)
+        for (i = 0; i < l; i++) {
             temp[array[i]] = array[i];
+        }
         int j = 0;
         int max1 = max + 1;
         for (i = 0; i < max1; i++) {
