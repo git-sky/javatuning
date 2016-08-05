@@ -6,53 +6,47 @@ import java.util.StringTokenizer;
 
 public class StringSplitTest {
 
-    //@Test
+    @Test
     public void testSplit_i() {
-
-        String orgStr = null;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             sb.append(i);
             sb.append(";");
         }
-        orgStr = sb.toString();
-        long begintime = System.currentTimeMillis();
+        String orgStr = sb.toString();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 10000; i++) {
             orgStr.split(";");
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testSplit_i ����:" + (endtime - begintime) + " ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testSplit_i: " + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testSplit() {
-
-        String orgStr = null;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             sb.append(i);
             sb.append(";");
         }
-        orgStr = sb.toString();
-        long begintime = System.currentTimeMillis();
+        String orgStr = sb.toString();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 10000; i++) {
             orgStr.split(";");
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testSplit ����:" + (endtime - begintime) + " ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testSplit:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testToken() {
-
-        String orgStr = null;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             sb.append(i);
             sb.append(";");
         }
-        orgStr = sb.toString();
-        long begintime = System.currentTimeMillis();
+        String orgStr = sb.toString();
+        long begTime = System.currentTimeMillis();
         StringTokenizer st = new StringTokenizer(orgStr, ";");
         //StringTokenizer st=orgs;
         for (int i = 0; i < 10000; i++) {
@@ -62,37 +56,31 @@ public class StringSplitTest {
             }
             st = new StringTokenizer(orgStr, ";");
         }
-        long endtime = System.currentTimeMillis();
-
-        System.out.println("testToken ����:" + (endtime - begintime) + " ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testToken: " + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testIndexOf() {
-
-        String orgStr = null;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             sb.append(i);
             sb.append(";");
         }
-        orgStr = sb.toString();
-
-        long begintime = System.currentTimeMillis();
+        String orgStr = sb.toString();
+        long begTime = System.currentTimeMillis();
         String tmp = orgStr;
         for (int i = 0; i < 10000; i++) {
             while (true) {
-                String splitStr = null;
                 int j = tmp.indexOf(';');
                 if (j < 0) break;
-                splitStr = tmp.substring(0, j);
+                String splitStr = tmp.substring(0, j);
                 tmp = tmp.substring(j + 1);
             }
             tmp = orgStr;
         }
-        long endtime = System.currentTimeMillis();
-
-        System.out.println("testIndexOf ����:" + (endtime - begintime) + " ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testIndexOf: " + (endTime - begTime) + "ms");
     }
 
 }

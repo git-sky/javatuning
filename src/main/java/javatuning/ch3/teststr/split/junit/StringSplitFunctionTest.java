@@ -7,7 +7,7 @@ public class StringSplitFunctionTest {
     @Test
     public void testSplit() {
         String str = "a;b,c:d";
-        String re[] = "a;b,c:d".split("[;|,|:]");
+        String re[] = str.split("[;|,|:]");
         for (String s : re) {
             System.out.println(s);
         }

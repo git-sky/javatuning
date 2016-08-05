@@ -6,16 +6,17 @@ public class StrCharAtStartTest {
 
     @Test
     public void testCharAt() {
-        String orgStr = null;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             sb.append(i);
             sb.append(";");
         }
-        orgStr = sb.toString();
+        String orgStr = sb.toString();
+        System.out.println(orgStr);
+
         int len = orgStr.length();
 
-        long begintime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
             if (orgStr.charAt(0) == 'a'
                     && orgStr.charAt(1) == 'b'
@@ -24,30 +25,27 @@ public class StrCharAtStartTest {
                     && orgStr.charAt(len - 2) == 'b'
                     && orgStr.charAt(len - 3) == 'c') ;
         }
-        long endtime = System.currentTimeMillis();
-
-        System.out.println("testCharAt ����:" + (endtime - begintime) + " ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testCharAt: " + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testStartwith() {
-        String orgStr = null;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 1000; i++) {
             sb.append(i);
             sb.append(";");
         }
-        orgStr = sb.toString();
-        int len = orgStr.length();
+        String orgStr = sb.toString();
+        System.out.println(orgStr);
 
-        long begintime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
             orgStr.startsWith("abc");
             orgStr.endsWith("abc");
         }
-        long endtime = System.currentTimeMillis();
-
-        System.out.println("testStartwith ����:" + (endtime - begintime) + " ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testStartwith: " + (endTime - begTime) + "ms");
     }
 
 }

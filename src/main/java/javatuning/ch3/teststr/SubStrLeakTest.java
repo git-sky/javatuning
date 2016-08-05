@@ -8,13 +8,9 @@ public class SubStrLeakTest {
     public static void main(String args[]) {
         List<String> handler = new ArrayList<String>();
 
-        /**
-         * Huge����1000 �� ��oom
-         * ����ImprovedHuge ����
-         */
-        for (int i = 0; i < 1000; i++) {
-            // HugeStr h = new HugeStr();
-            ImprovedHugeStr h = new ImprovedHugeStr();
+        for (int i = 0; i < 100000; i++) {
+            HugeStr h = new HugeStr();
+            //ImprovedHugeStr h = new ImprovedHugeStr();
             handler.add(h.getSubString(1, 5));
         }
     }
