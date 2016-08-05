@@ -10,76 +10,77 @@ public class TestTech {
 
     @Test
     public void testInForTryCatch() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int a = 0;
         for (int i = 0; i < 100000000; i++) {
             try {
                 a++;
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testInForTryCatch:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testInForTryCatch:" + (endTime - begTime) + "ms");
     }
-
 
     @Test
     public void testOutForTryCatch() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int a = 0;
         try {
             for (int i = 0; i < 100000000; i++) {
                 a++;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testOutForTryCatch:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testOutForTryCatch:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testLocalVar() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int a = 0;
         for (int i = 0; i < 100000000; i++) {
             a++;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testLocalVar:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testLocalVar:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testMemberVar() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 100000000; i++) {
             ta++;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testMemberVar:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testMemberVar:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testMultiply() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         long a = 100;
         for (int i = 0; i < 10000000; i++) {
             a *= 2;
             a /= 2;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testMultiply:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testMultiply:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testMultiplyBit() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         long a = 100;
         for (int i = 0; i < 10000000; i++) {
             a <<= 1;
             a >>= 1;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testMemberVar:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testMemberVar:" + (endTime - begTime) + "ms");
     }
 
     protected int switchInt(int z) {
@@ -129,69 +130,69 @@ public class TestTech {
 
     @Test
     public void testIfelseInt() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int re = 0;
         for (int i = 0; i < 10000000; i++) {
             re = ifelseInt(i);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testIfelseInt:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testIfelseInt:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testSwitchInt() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int re = 0;
         for (int i = 0; i < 10000000; i++) {
             re = switchInt(i);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testSwitchInt:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testSwitchInt:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testArrayInt() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int re = 0;
         int[] sw = new int[]{0, 3, 6, 7, 8, 10, 16, 18, 44};
         for (int i = 0; i < 10000000; i++) {
             re = arrayInt(sw, i);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testArrayInt:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testArrayInt:" + (endTime - begTime) + "ms");
     }
 
-    //@Test
+    @Test
     public void testMethodCall() {
         int re = 0;
         ArrayList<Integer> al = new ArrayList<Integer>();
         for (int i = 0; i < 1000000; i++)
             al.add(i);
 
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int k = 0; k < 1000; k++)
             for (int i = 0; i < al.size(); i++) {
                 re = al.get(i);
             }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testMethodCall:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testMethodCall:" + (endTime - begTime) + "ms");
     }
 
-    //@Test
+    @Test
     public void testNoMethodCall() {
         int re = 0;
         ArrayList<Integer> al = new ArrayList<Integer>();
         for (int i = 0; i < 1000000; )
             al.add(i++);
 
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int size = al.size();
         for (int k = 0; k < 1000; k++)
             for (int i = 0; i < size; ) {
                 re = al.get(i++);
             }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testNoMethodCall:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testNoMethodCall:" + (endTime - begTime) + "ms");
     }
 
     @Test
@@ -201,13 +202,13 @@ public class TestTech {
         double b = Math.random();
         double e = Math.random();
         double x, y;
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
             x = d * a * b / 3 * 4 * a;
             y = e * a * b / 3 * 4 * a;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testWeitiqu:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testWeitiqu:" + (endTime - begTime) + "ms");
     }
 
     @Test
@@ -217,95 +218,95 @@ public class TestTech {
         double b = Math.random();
         double e = Math.random();
         double t, x, y;
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
             t = a * b / 3 * 4 * a;
             x = d * t;
             y = e * t;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testTiqu:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testTiqu:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testNormaCircle() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int[] array = new int[9999999];
         for (int i = 0; i < 9999999; i++) {
             array[i] = i;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testNormaCircle:" + (endtime - starttime) + " " + array[9999998]);
+        long endTime = System.currentTimeMillis();
+        System.out.println("testNormaCircle:" + (endTime - begTime) + " " + array[9999998]);
     }
 
     @Test
     public void testExpandCircle() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int[] array = new int[9999999];
         for (int i = 0; i < 9999999; i += 3) {
             array[i] = i;
             array[i + 1] = i + 1;
             array[i + 2] = i + 2;
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testExpandCircle:" + (endtime - starttime) + " " + array[9999998]);
+        long endTime = System.currentTimeMillis();
+        System.out.println("testExpandCircle:" + (endTime - begTime) + " " + array[9999998]);
     }
 
     @Test
     public void testBitLogic() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         boolean a = false;
         boolean b = true;
         int d = 0;
         for (int i = 0; i < 10000000; i++)
             if (a & b & "Java_Perform".contains("Java"))
                 d = 0;
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBitLogic:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBitLogic:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testBooleanLogic() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         boolean a = false;
         boolean b = true;
         int d = 0;
         for (int i = 0; i < 10000000; i++)
             if (a && b && "Java_Perform".contains("Java"))
                 d = 0;
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBooleanLogic:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBooleanLogic:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testArrayCopyNormal() {
         int size = 100000;
         int[] array = new int[size];
-        int[] arraydst = new int[size];
+        int[] arrayDest = new int[size];
         for (int i = 0; i < array.length; i++) {
             array[i] = i;
         }
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int k = 0; k < 1000; k++)
             for (int i = 0; i < size; i++)
-                arraydst[i] = array[i];
-        long endtime = System.currentTimeMillis();
-        System.out.println("testArrayCopyNormal:" + (endtime - starttime) + " last:" + arraydst[size - 1]);
+                arrayDest[i] = array[i];
+        long endTime = System.currentTimeMillis();
+        System.out.println("testArrayCopyNormal:" + (endTime - begTime) + " last:" + arrayDest[size - 1]);
     }
 
     @Test
     public void testArrayCopySystem() {
         int size = 100000;
         int[] array = new int[size];
-        int[] arraydst = new int[size];
+        int[] arrayDest = new int[size];
         for (int i = 0; i < array.length; i++) {
             array[i] = i;
         }
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int k = 0; k < 1000; k++)
-            System.arraycopy(array, 0, arraydst, 0, size);
-        long endtime = System.currentTimeMillis();
-        System.out.println("testArrayCopySystem:" + (endtime - starttime) + " last:" + arraydst[size - 1]);
+            System.arraycopy(array, 0, arrayDest, 0, size);
+        long endTime = System.currentTimeMillis();
+        System.out.println("testArrayCopySystem:" + (endTime - begTime) + " last:" + arrayDest[size - 1]);
     }
 
 }

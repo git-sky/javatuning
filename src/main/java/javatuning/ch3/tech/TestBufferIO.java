@@ -21,58 +21,76 @@ public class TestBufferIO {
     @Test
     public void testStream() throws IOException {
         DataOutputStream dos = new DataOutputStream(new FileOutputStream("testfile.txt"));
-        long start = System.currentTimeMillis();
+
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             dos.writeBytes(String.valueOf(i) + "\r\n");
         dos.close();
-        System.out.println("testStream write file cost:" + (System.currentTimeMillis() - start));
-        start = System.currentTimeMillis();
+        long endTime = System.currentTimeMillis();
+        System.out.println("testStream write file cost:" + (endTime - begTime));
+
         DataInputStream dis = new DataInputStream(new FileInputStream("testfile.txt"));
+
+        begTime = System.currentTimeMillis();
         while (dis.readLine() != null) ;
         dis.close();
-        System.out.println("testStream read file cost:" + (System.currentTimeMillis() - start));
+        endTime = System.currentTimeMillis();
+        System.out.println("testStream read file cost:" + (endTime - begTime));
     }
 
     @Test
     public void testBufferedStream() throws IOException {
         DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("testfile.txt")));
-        long start = System.currentTimeMillis();
+
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             dos.writeBytes(String.valueOf(i) + "\r\n");
         dos.close();
-        System.out.println("testBufferedStream write file cost:" + (System.currentTimeMillis() - start));
-        start = System.currentTimeMillis();
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferedStream write file cost:" + (endTime - begTime));
+
         DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream("testfile.txt")));
+
+        begTime = System.currentTimeMillis();
         while (dis.readLine() != null) ;
         dis.close();
-        System.out.println("testBufferedStream read file cost:" + (System.currentTimeMillis() - start));
+        endTime = System.currentTimeMillis();
+        System.out.println("testBufferedStream read file cost:" + (endTime - begTime));
     }
 
     @Test
     public void testReaderWriter() throws IOException {
         FileWriter fw = new FileWriter("testfile.txt");
-        long start = System.currentTimeMillis();
+
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             fw.write(String.valueOf(i) + "\r\n");
         fw.close();
-        System.out.println("testReaderWriter write file cost:" + (System.currentTimeMillis() - start));
-        start = System.currentTimeMillis();
+        long endTime = System.currentTimeMillis();
+        System.out.println("testReaderWriter write file cost:" + (endTime - begTime));
+
         FileReader fr = new FileReader("testfile.txt");
+
+        begTime = System.currentTimeMillis();
         while (fr.read() != -1) ;
         fr.close();
-        System.out.println("testReaderWriter read file cost:" + (System.currentTimeMillis() - start));
+        endTime = System.currentTimeMillis();
+        System.out.println("testReaderWriter read file cost:" + (endTime - begTime));
     }
 
     @Test
     public void testBufferedReaderWriter() throws IOException {
         BufferedWriter fw = new BufferedWriter(new FileWriter("testfile.txt"));
+
         long start = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             fw.write(String.valueOf(i) + "\r\n");
         fw.close();
         System.out.println("testBufferedReaderWriter write file cost:" + (System.currentTimeMillis() - start));
-        start = System.currentTimeMillis();
+
         BufferedReader fr = new BufferedReader(new FileReader("testfile.txt"));
+
+        start = System.currentTimeMillis();
         while (fr.read() != -1) ;
         fr.close();
         System.out.println("testBufferedReaderWriter read file cost:" + (System.currentTimeMillis() - start));

@@ -6,7 +6,7 @@ public class TestArray {
 
     @Test
     public void test1Array() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int[] array = new int[1000000];
         int re = 0;
         int size = array.length;
@@ -17,14 +17,13 @@ public class TestArray {
         for (int k = 0; k < 100; k++)
             for (int i = 0; i < size; i++)
                 re = array[i];
-        long endtime = System.currentTimeMillis();
-        System.out.println("test1Array:" + (endtime - starttime));
-
+        long endTime = System.currentTimeMillis();
+        System.out.println("test1Array: " + (endTime - begTime) + "ms");
     }
 
     @Test
     public void test1Array_size() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int[] array = new int[1000000];
         int re = 0;
         for (int k = 0; k < 100; k++)
@@ -34,14 +33,13 @@ public class TestArray {
         for (int k = 0; k < 100; k++)
             for (int i = 0; i < array.length; i++)
                 re = array[i];
-        long endtime = System.currentTimeMillis();
-        System.out.println("test1Array_size:" + (endtime - starttime));
-
+        long endTime = System.currentTimeMillis();
+        System.out.println("test1Array_size: " + (endTime - begTime) + "ms");
     }
 
     @Test
     public void test2Array() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int[][] array = new int[1000][1000];
         int re = 0;
         int size = array.length;
@@ -55,13 +53,13 @@ public class TestArray {
             for (int i = 0; i < size; i++)
                 for (int j = 0; j < size1; j++)
                     re = array[i][j];
-        long endtime = System.currentTimeMillis();
-        System.out.println("test2Array:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("test2Array: " + (endTime - begTime) + "ms");
     }
 
     @Test
     public void test2Array_size() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         int[][] array = new int[1000][1000];
         int re = 0;
         for (int k = 0; k < 100; k++)
@@ -73,8 +71,8 @@ public class TestArray {
             for (int i = 0; i < array.length; i++)
                 for (int j = 0; j < array[0].length; j++)
                     re = array[i][j];
-        long endtime = System.currentTimeMillis();
-        System.out.println("test2Array_size:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("test2Array_size: " + (endTime - begTime) + "ms");
     }
 
 }

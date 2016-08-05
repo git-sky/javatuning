@@ -8,58 +8,58 @@ public class TestAppendString {
 
     @Test
     public void testStringAppend() {
-        long startTime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < CIRCLE; i++) {
             String result = "String" + "and" + "String" + "append";
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testStringAppend ���� ��" + (endTime - startTime));
+        System.out.println("testStringAppend:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testStringAppend2_i() {
-        long startTime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         String str1 = "String";
         String str2 = "and";
         String str3 = "String";
         String str4 = "append";
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i < CIRCLE; i++) {
             String result = str1 + str2 + str3 + str4;
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testStringAppend2_i ���� ��" + (endTime - startTime));
+        System.out.println("testStringAppend2_i:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testStringAppend2() {
-        long startTime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         String str1 = "String";
         String str2 = "and";
         String str3 = "String";
         String str4 = "append";
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i < CIRCLE; i++) {
             String result = str1 + str2 + str3 + str4;
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testStringAppend2 ���� ��" + (endTime - startTime));
+        System.out.println("testStringAppend2:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testStringConcat() {
-        long startTime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         String result;
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i < CIRCLE; i++) {
             result = "String".concat("and").concat("String").concat("append");
             //String result = "String"+ "and"+ "String"+"append";
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testStringConcat ���� ��" + (endTime - startTime));
+        System.out.println("testStringConcat:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testStringBufferAppend() {
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 50000; i++) {
+        long begTime = System.currentTimeMillis();
+        for (int i = 0; i < CIRCLE; i++) {
             StringBuffer result = new StringBuffer();
             result.append("String");
             result.append("and");
@@ -67,13 +67,13 @@ public class TestAppendString {
             result.append("append");
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testStringBufferAppend ���� ��" + (endTime - startTime));
+        System.out.println("testStringBufferAppend:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testStringBuilderAppend() {
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 50000; i++) {
+        long begTime = System.currentTimeMillis();
+        for (int i = 0; i < CIRCLE; i++) {
             StringBuilder result = new StringBuilder();
             result.append("String");
             result.append("and");
@@ -81,7 +81,7 @@ public class TestAppendString {
             result.append("append");
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testStringBuilderAppend ���� ��" + (endTime - startTime));
+        System.out.println("testStringBuilderAppend:" + (endTime - begTime) + "ms");
     }
 
 }

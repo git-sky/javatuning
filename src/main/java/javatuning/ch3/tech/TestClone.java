@@ -14,7 +14,7 @@ public class TestClone {
         public Student() {
             try {
                 Thread.sleep(1000);
-                System.out.println("Student Construnctor called");
+                System.out.println("Student Constructor called");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

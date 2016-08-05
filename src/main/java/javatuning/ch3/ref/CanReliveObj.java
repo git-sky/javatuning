@@ -1,6 +1,7 @@
 package javatuning.ch3.ref;
 
 public class CanReliveObj {
+
     public static CanReliveObj obj;
 
     @Override
