@@ -25,7 +25,7 @@ public class TestMapCapacityGet implements java.io.Serializable {
 
     Map map;
 
-    protected void testCapacity(String funcname) {
+    protected void testCapacity(String funcName) {
         for (int i = 0; i < 100000; i++) {
             String key = Double.toString(Math.random());
             map.put(key, key);
@@ -38,22 +38,16 @@ public class TestMapCapacityGet implements java.io.Serializable {
             f.setAccessible(true);
             s = ((Object[]) f.get(map)).length;
             f.setAccessible(false);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 100000; i++) {
             String key = Double.toString(Math.random());
             map.get(key);
         }
         long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime) + " map size:" + s);
+        System.out.println(funcName + ": " + (endtime - begTime) + "ms, " + " map size:" + s);
     }
 
     @Test
@@ -99,11 +93,11 @@ public class TestMapCapacityGet implements java.io.Serializable {
         testCapacity("testCapacityHashMap_200000_1");
     }
 
-    //treemap
+    //treeMap
     @Test
-    public void testDefaultTreemap() {
+    public void testDefaultTreeMap() {
         map = new TreeMap();
-        testCapacity("testDefaultTreemap");
+        testCapacity("testDefaultTreeMap");
     }
 
     //LinkedHashMap

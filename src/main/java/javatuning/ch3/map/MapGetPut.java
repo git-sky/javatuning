@@ -9,21 +9,22 @@ import java.util.Map;
 
 public class MapGetPut {
 
-    Map map;
-    final int CIRCLE1 = 100000;
+    private static final int CIRCLE1 = 100000;
 
-    protected void testGet(String funcname) {
+    private Map map;
+
+    protected void testGet(String funcName) {
         for (int i = 0; i < CIRCLE1; i++) {
             String key = Double.toString(Math.random());
             map.put(key, key);
         }
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < CIRCLE1; i++) {
             String key = Double.toString(Math.random());
             map.get(key);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println(funcName + ": " + (endTime - begTime) + "ms");
     }
 
     @Test

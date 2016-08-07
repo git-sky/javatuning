@@ -28,8 +28,8 @@ public class MapHashcodeTest {
         }
     }
 
-    Map map;
-    final int CIRCLE1 = 10000;
+    private static final int CIRCLE1 = 10000;
+    private Map map;
 
     @Test
     public void testGetGoodHash() {
@@ -38,13 +38,13 @@ public class MapHashcodeTest {
             GoodHash key = new GoodHash(Math.random());
             map.put(key, key);
         }
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < CIRCLE1; i++) {
             GoodHash key = new GoodHash(Math.random());
             map.get(key);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testGetGoodHash" + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testGetGoodHash" + ": " + (endTime - begTime) + "ms");
     }
 
     @Test
@@ -54,13 +54,13 @@ public class MapHashcodeTest {
             BadHash key = new BadHash(Math.random());
             map.put(key, key);
         }
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < CIRCLE1; i++) {
             BadHash key = new BadHash(Math.random());
             map.get(key);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testGetBadHash" + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testGetBadHash" + ": " + (endTime - begTime) + "ms");
     }
 
 }

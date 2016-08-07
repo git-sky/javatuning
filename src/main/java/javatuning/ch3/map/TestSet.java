@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 public class TestSet {
 
-    Set set;
+    private Set set;
 
     public void initSet() {
         set.add(100);

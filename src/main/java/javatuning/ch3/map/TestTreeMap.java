@@ -8,16 +8,16 @@ import java.util.TreeMap;
 
 public class TestTreeMap {
 
-    Map map;
+    private Map map;
 
     public static class Student implements Comparable<Student> {
+        private String name;
+        private int score;
+
         public Student(String name, int s) {
             this.name = name;
             this.score = s;
         }
-
-        String name;
-        int score;
 
         @Override
         public int compareTo(Student o) {
@@ -30,12 +30,8 @@ public class TestTreeMap {
 
         @Override
         public String toString() {
-            StringBuffer sb = new StringBuffer();
-            sb.append("name:");
-            sb.append(name);
-            sb.append("  ");
-            sb.append("score:");
-            sb.append(score);
+            StringBuilder sb = new StringBuilder();
+            sb.append("name=").append(name).append(",").append("score=").append(score);
             return sb.toString();
         }
     }
@@ -49,7 +45,7 @@ public class TestTreeMap {
 
         @Override
         public String toString() {
-            return s.name + "'s detail infomation";
+            return s.name + "'s detail information";
         }
     }
 

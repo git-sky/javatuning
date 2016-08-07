@@ -8,9 +8,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TestLinkedHashMap {
-    Map<String, String> map;
 
-    public void testOutputMap(String funcname) {
+    private Map<String, String> map;
+
+    public void testOutputMap(String funcName) {
         map.put("1", "aa");
         map.put("2", "bb");
         map.put("3", "cc");
@@ -18,7 +19,7 @@ public class TestLinkedHashMap {
         map.get("3");
         for (Iterator iterator = map.keySet().iterator(); iterator.hasNext(); ) {
             String name = (String) iterator.next();
-            System.out.println(name + "->" + map.get(name));
+            System.out.println(funcName + ": " + name + "->" + map.get(name));
             // System.out.println(name);
         }
     }
