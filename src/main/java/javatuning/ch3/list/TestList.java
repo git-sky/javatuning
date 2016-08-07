@@ -10,70 +10,70 @@ import java.util.Vector;
 public class TestList {
 
     private static final int CIRCLE1 = 100000;
-    protected List list;
 
-    protected void testAddTail(String funcname) {
+    private List list;
+
+    protected void testAddTail(String funcName) {
         Object obj = new Object();
-        long starttime = System.currentTimeMillis();
-
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 500000; i++) {
             list.add(obj);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println(funcName + ": " + (endTime - begTime) + "ms");
     }
 
-    protected void testDelTail(String funcname) {
+    protected void testDelTail(String funcName) {
         Object obj = new Object();
         for (int i = 0; i < CIRCLE1; i++) {
             list.add(obj);
         }
 
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         while (list.size() > 0) {
             list.remove(list.size() - 1);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println(funcName + ": " + (endTime - begTime) + "ms");
     }
 
-    protected void testDelFirst(String funcname) {
+    protected void testDelFirst(String funcName) {
         Object obj = new Object();
         for (int i = 0; i < CIRCLE1; i++) {
             list.add(obj);
         }
 
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         while (list.size() > 0) {
             list.remove(0);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println(funcName + ": " + (endTime - begTime) + "ms");
     }
 
-    protected void testDelMiddle(String funcname) {
+    protected void testDelMiddle(String funcName) {
         Object obj = new Object();
         for (int i = 0; i < CIRCLE1; i++) {
             list.add(obj);
         }
 
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         while (list.size() > 0) {
             list.remove(list.size() >> 1);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println(funcName + ": " + (endTime - begTime) + "ms");
     }
 
-    protected void testAddFirst(String funcname) {
+    protected void testAddFirst(String funcName) {
         Object obj = new Object();
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
 
         for (int i = 0; i < 50000; i++) {
             list.add(0, obj);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println(funcName + ": " + (endTime - begTime) + "ms");
     }
 
     //====add tail
@@ -83,7 +83,7 @@ public class TestList {
         testAddTail("testAddTailArrayList");
     }
 
-    //@Test
+    @Test
     public void testAddTailVector() {
         list = new Vector();
         testAddTail("testAddTailVector");
@@ -96,70 +96,70 @@ public class TestList {
     }
 
     //====add first
-    //@Test
+    @Test
     public void testAddFirstArrayList() {
         list = new ArrayList();
         testAddFirst("testAddFirstArrayList");
     }
 
-    //@Test
+    @Test
     public void testAddFirstVector() {
         list = new Vector();
         testAddFirst("testAddFirstVector");
     }
 
-    //@Test
+    @Test
     public void testAddFirstLinkedList() {
         list = new LinkedList();
         testAddFirst("testAddFirstLinkedList");
     }
 
     //====delete tail
-    //@Test
+    @Test
     public void testDeleteTailArrayList() {
         list = new ArrayList();
-
         testDelTail("testDeleteTailArrayList");
     }
 
-    //@Test
+    @Test
     public void testDeleteTailVector() {
         list = new Vector();
         testDelTail("testDeleteTailVector");
     }
 
-    //@Test
+    @Test
     public void testDeleteTailLinkedList() {
         list = new LinkedList();
         testDelTail("testDeleteTailLinkedList");
     }
 
     //====delete first
-    //@Test
+    @Test
     public void testDeleteFirstArrayList() {
         list = new ArrayList();
         testDelFirst("testDeleteFirstArrayList");
     }
 
-    //@Test
+    @Test
     public void testDeleteFirstVector() {
         list = new Vector();
         testDelFirst("testDeleteFirstVector");
     }
 
-    //@Test
+    @Test
     public void testDeleteFirstLinkedList() {
         list = new LinkedList();
         testDelFirst("testDeleteFirstLinkedList");
     }
 
-    //@Test
+    //====delete middle
+    @Test
     public void testDeleteMiddleLinkedList() {
         list = new LinkedList();
         testDelMiddle("testDeleteMiddleLinkedList");
     }
 
-    //@Test
+    @Test
     public void testDeleteMiddleArrayList() {
         list = new ArrayList();
         testDelMiddle("testDeleteMiddleArrayList");

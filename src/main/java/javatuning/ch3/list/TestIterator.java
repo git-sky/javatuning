@@ -9,37 +9,42 @@ import java.util.List;
 
 public class TestIterator {
 
-    List<String> list = null;
     private static final int CIRCLE = 1000000;
+
+    private List<String> list = null;
 
     public void initList(List<String> list) {
         list.clear();
         for (int i = 0; i < CIRCLE; i++) {
-            list.add(String.valueOf(0));
+            list.add(String.valueOf(i));
         }
     }
 
     public void internalTest() {
         String tmp;
-        long start = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (String s : list) {
             tmp = s;
         }
-        System.out.println("foreach spend:" + (System.currentTimeMillis() - start));
+        long endTime = System.currentTimeMillis();
+        System.out.println("foreach spend: " + (endTime - begTime) + "ms");
 
-        start = System.currentTimeMillis();
+        begTime = System.currentTimeMillis();
         for (Iterator<String> it = list.iterator(); it.hasNext(); ) {
             tmp = it.next();
         }
-        System.out.println("Iterator spend;" + (System.currentTimeMillis() - start));
+        endTime = System.currentTimeMillis();
+        System.out.println("iterator spend: " + (endTime - begTime) + "ms");
 
         if (list instanceof LinkedList) return;
-        start = System.currentTimeMillis();
+
+        begTime = System.currentTimeMillis();
         int size = list.size();
         for (int i = 0; i < size; i++) {
             tmp = list.get(i);
         }
-        System.out.println("for spend;" + (System.currentTimeMillis() - start));
+        endTime = System.currentTimeMillis();
+        System.out.println("for spend: " + (endTime - begTime) + "ms");
     }
 
     @Test

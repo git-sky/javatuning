@@ -9,17 +9,16 @@ import java.util.List;
  * -Xmx512M -Xms512M
  */
 public class TestListCapacity {
+
     protected List list;
 
-    protected void testAddTail(String funcname) {
-        Object obj = new Object();
-        long starttime = System.currentTimeMillis();
-
+    protected void testAddTail(String funcName) {
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
-            list.add(obj);
+            list.add(i);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println(funcname + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println(funcName + ": " + (endTime - begTime) + "ms");
     }
 
     @Test

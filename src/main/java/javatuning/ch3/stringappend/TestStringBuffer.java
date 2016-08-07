@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class TestStringBuffer {
 
-    private static final int CIRCLE = 500000;
+    private static final int CIRCLE = 50000;
 
     @Test
     public void testStringPlus() {
