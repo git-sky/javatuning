@@ -9,7 +9,7 @@ import java.util.Vector;
 
 public class TestRandomAccess {
 
-    List list = null;
+    private List list = null;
 
     @Test
     public void testVector() {
@@ -25,7 +25,7 @@ public class TestRandomAccess {
     }
 
     public void testIterator() {
-        long startTime = System.nanoTime();
+        long begTime = System.nanoTime();
         for (int k = 0; k < 10000; k++) {
             Object o;
             Iterator itr = list.iterator();
@@ -34,11 +34,11 @@ public class TestRandomAccess {
             }
         }
         long endTime = System.nanoTime();
-        System.out.println(endTime - startTime);
+        System.out.println(endTime - begTime);
     }
 
     public void testRandomAccess(String name) {
-        long startTime = System.nanoTime();
+        long begTime = System.nanoTime();
         for (int k = 0; k < 10000; k++) {
             Object o;
             if (list instanceof RandomAccess) {
@@ -53,7 +53,7 @@ public class TestRandomAccess {
             }
         }
         long endTime = System.nanoTime();
-        System.out.println(endTime - startTime);
+        System.out.println(endTime - begTime);
     }
 
 }

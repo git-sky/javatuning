@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Vector;
 
-public class TestCollectionVisistTuning extends Vector {
+public class TestCollectionVisitTuning extends Vector {
+
     static List collection = new Vector();
 
     static {
@@ -17,10 +18,9 @@ public class TestCollectionVisistTuning extends Vector {
         collection.add("south20");
         collection.add("north10");
         collection.add("east9");
-
     }
 
-    public TestCollectionVisistTuning() {
+    public TestCollectionVisitTuning() {
         this.add("north65");
         this.add("west20");
         this.add("east30");
@@ -33,7 +33,7 @@ public class TestCollectionVisistTuning extends Vector {
 
     @Test
     public void testCount() {
-        long starttime = System.nanoTime();
+        long begTime = System.nanoTime();
         int count = 0;
         for (int i = 0; i < collection.size(); i++) {
             if ((((String) collection.get(i)).indexOf("north") != -1)
@@ -41,71 +41,71 @@ public class TestCollectionVisistTuning extends Vector {
                     || (((String) collection.get(i)).indexOf("south") != -1))
                 count++;
         }
-        long endtime = System.nanoTime();
-        System.out.println(endtime - starttime);
+        long endTime = System.nanoTime();
+        System.out.println(endTime - begTime);
     }
 
     @Test
     public void testCount1() {
-        long starttime = System.nanoTime();
+        long begTime = System.nanoTime();
         int count = 0;
-        int colsize = collection.size();
-        for (int i = 0; i < colsize; i++) {
+        int collectionSize = collection.size();
+        for (int i = 0; i < collectionSize; i++) {
             if ((((String) collection.get(i)).indexOf("north") != -1)
                     || (((String) collection.get(i)).indexOf("west") != -1)
                     || (((String) collection.get(i)).indexOf("south") != -1))
                 count++;
         }
-        long endtime = System.nanoTime();
-        System.out.println(endtime - starttime);
+        long endTime = System.nanoTime();
+        System.out.println(endTime - begTime);
     }
 
     @Test
     public void testCount2() {
-        long starttime = System.nanoTime();
+        long begTime = System.nanoTime();
         int count = 0;
         String s = null;
-        int colsize = collection.size();
-        for (int i = 0; i < colsize; i++) {
+        int collectionSize = collection.size();
+        for (int i = 0; i < collectionSize; i++) {
             if (((s = (String) collection.get(i)).indexOf("north") != -1)
                     || (s.indexOf("west") != -1)
                     || (s.indexOf("south") != -1))
                 count++;
         }
-        long endtime = System.nanoTime();
-        System.out.println(endtime - starttime);
+        long endTime = System.nanoTime();
+        System.out.println(endTime - begTime);
     }
 
     @Test
     public void testCount2_5() {
-        long starttime = System.nanoTime();
+        long begTime = System.nanoTime();
         int count = 0;
         String s = null;
-        int colsize = this.elementCount;
-        for (int i = 0; i < colsize; i++) {
+        int collectionSize = this.elementCount;
+        for (int i = 0; i < collectionSize; i++) {
             if (((s = (String) this.get(i)).indexOf("north") != -1)
                     || (s.indexOf("west") != -1)
                     || (s.indexOf("south") != -1))
                 count++;
         }
-        long endtime = System.nanoTime();
-        System.out.println(endtime - starttime);
+        long endTime = System.nanoTime();
+        System.out.println(endTime - begTime);
     }
 
     @Test
     public void testCount3() {
-        long starttime = System.nanoTime();
+        long begTime = System.nanoTime();
         int count = 0;
         String s = null;
-        int colsize = this.elementCount;
-        for (int i = 0; i < colsize; i++) {
+        int collectionSize = this.elementCount;
+        for (int i = 0; i < collectionSize; i++) {
             if (((s = (String) elementData[i]).indexOf("north") != -1)
                     || (s.indexOf("west") != -1)
                     || (s.indexOf("south") != -1))
                 count++;
         }
-        long endtime = System.nanoTime();
-        System.out.println(endtime - starttime);
+        long endTime = System.nanoTime();
+        System.out.println(endTime - begTime);
     }
 
 }
