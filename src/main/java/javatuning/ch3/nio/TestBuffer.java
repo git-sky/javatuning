@@ -12,7 +12,7 @@ public class TestBuffer {
 
     @Test
     public void test() {
-        System.out.println("++++++++++++test begin++++++++++++");
+        System.out.println("++++++++++++test beg++++++++++++");
         ByteBuffer b = ByteBuffer.allocate(15);
         System.out.println("limit=" + b.limit() + " capacity=" + b.capacity() + " position=" + b.position());
         for (int i = 0; i < 10; i++) {
@@ -22,7 +22,7 @@ public class TestBuffer {
         b.flip();
         System.out.println("limit=" + b.limit() + " capacity=" + b.capacity() + " position=" + b.position());
         for (int i = 0; i < 5; i++) {
-            System.out.print(b.get());
+            System.out.print(b.get() + ",");
         }
         System.out.println();
         System.out.println("limit=" + b.limit() + " capacity=" + b.capacity() + " position=" + b.position());
@@ -33,11 +33,11 @@ public class TestBuffer {
 
     @Test
     public void test2() {
-        System.out.println("++++++++++++test2 begin++++++++++++");
+        System.out.println("++++++++++++test2 beg++++++++++++");
         ByteBuffer b = ByteBuffer.allocate(15);
         System.out.println("limit=" + b.limit() + " capacity=" + b.capacity() + " position=" + b.position());
         for (int i = 0; i < 5; i++) {
-            System.out.print(b.get());
+            System.out.print(b.get() + ",");
         }
         System.out.println();
         System.out.println("limit=" + b.limit() + " capacity=" + b.capacity() + " position=" + b.position());
@@ -46,7 +46,7 @@ public class TestBuffer {
 
     @Test
     public void testRest() {
-        System.out.println("++++++++++++testRest begin++++++++++++");
+        System.out.println("++++++++++++testRest beg++++++++++++");
         ByteBuffer b = ByteBuffer.allocate(15);
         System.out.println("limit=" + b.limit() + " capacity=" + b.capacity() + " position=" + b.position());
         for (int i = 0; i < 5; i++) {
@@ -55,7 +55,7 @@ public class TestBuffer {
         System.out.println("limit=" + b.limit() + " capacity=" + b.capacity() + " position=" + b.position());
         b.clear();
         for (int i = 0; i < 5; i++) {
-            System.out.print(b.get());
+            System.out.print(b.get() + ",");
         }
         System.out.println();
         System.out.println("++++++++++++testRest end++++++++++++");
@@ -63,7 +63,7 @@ public class TestBuffer {
 
     @Test
     public void testSlice() {
-        System.out.println("++++++++++++testSlice begin++++++++++++");
+        System.out.println("++++++++++++testSlice beg++++++++++++");
         ByteBuffer b = ByteBuffer.allocate(15);
         for (int i = 0; i < 10; i++) {
             b.put((byte) i);
@@ -88,7 +88,7 @@ public class TestBuffer {
 
     @Test
     public void testReadOnlyBuffer() {
-        System.out.println("++++++++++++testReadOnlyBuffer begin++++++++++++");
+        System.out.println("++++++++++++testReadOnlyBuffer beg++++++++++++");
         ByteBuffer b = ByteBuffer.allocate(15);
         for (int i = 0; i < 10; i++) {
             b.put((byte) i);
@@ -113,7 +113,7 @@ public class TestBuffer {
 
     @Test
     public void testFileMap() throws IOException {
-        System.out.println("++++++++++++testFileMap begin++++++++++++");
+        System.out.println("++++++++++++testFileMap beg++++++++++++");
         RandomAccessFile raf = new RandomAccessFile("C:\\mapfile.txt", "rw");
         FileChannel fc = raf.getChannel();
 

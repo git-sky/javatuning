@@ -27,26 +27,26 @@ public class TestNioBuffer extends TestMapBuffer {
 
     @Test
     public void testBufferWrite() throws IOException {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileOutputStream fout = new FileOutputStream(new File("d:\\temp_buffer.tmp"));
-        FileChannel fc = fout.getChannel();
+        FileOutputStream fos = new FileOutputStream(new File("d:\\temp_buffer.tmp"));
+        FileChannel fc = fos.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         for (int i = 0; i < numOfInts; i++) {
             byteBuffer.put(int2byte(i));
         }
         byteBuffer.flip();
         fc.write(byteBuffer);
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBufferWrite:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferWrite:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testBufferRead() throws IOException {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileInputStream fin = new FileInputStream(new File("d:\\temp_buffer.tmp"));
-        FileChannel fc = fin.getChannel();
+        FileInputStream fis = new FileInputStream(new File("d:\\temp_buffer.tmp"));
+        FileChannel fc = fis.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         fc.read(byteBuffer);
         fc.close();
@@ -54,32 +54,32 @@ public class TestNioBuffer extends TestMapBuffer {
         while (byteBuffer.hasRemaining()) {
             byte2int(byteBuffer.get(), byteBuffer.get(), byteBuffer.get(), byteBuffer.get());
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBufferRead:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferRead:" + (endTime - begTime) + "ms");
     }
 
-    //@Test
+    @Test
     public void testBufferWriteInt() throws IOException {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileOutputStream fout = new FileOutputStream(new File("d:\\temp_buffer_int.tmp"));
-        FileChannel fc = fout.getChannel();
+        FileOutputStream fos = new FileOutputStream(new File("d:\\temp_buffer_int.tmp"));
+        FileChannel fc = fos.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         for (int i = 0; i < numOfInts; i++) {
             byteBuffer.put(int2byte(i));
         }
         byteBuffer.flip();
         fc.write(byteBuffer);
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBufferWriteInt:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferWriteInt: " + (endTime - begTime) + "ms");
     }
 
-    //@Test
+    @Test
     public void testBufferReadInt() throws IOException {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileInputStream fin = new FileInputStream(new File("d:\\temp_buffer_int.tmp"));
-        FileChannel fc = fin.getChannel();
+        FileInputStream fis = new FileInputStream(new File("d:\\temp_buffer_int.tmp"));
+        FileChannel fc = fis.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         fc.read(byteBuffer);
         fc.close();
@@ -88,8 +88,8 @@ public class TestNioBuffer extends TestMapBuffer {
         while (ib.hasRemaining()) {
             ib.get();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBufferReadInt:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferReadInt: " + (endTime - begTime) + "ms");
     }
 
 }

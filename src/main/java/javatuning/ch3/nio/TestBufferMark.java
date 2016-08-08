@@ -8,7 +8,7 @@ public class TestBufferMark {
 
     @Test
     public void test() {
-        //System.out.println("++++++++++++test begin++++++++++++");
+        System.out.println("++++++++++++test beg++++++++++++");
         ByteBuffer b = ByteBuffer.allocate(15);
         for (int i = 0; i < 10; i++) {
             b.put((byte) i);
@@ -23,9 +23,11 @@ public class TestBufferMark {
         }
         b.reset();
         System.out.println("\nreset to mark");
-        while (b.hasRemaining())
+        while (b.hasRemaining()) {
             System.out.print(b.get());
+        }
         System.out.println();
+        System.out.println("++++++++++++test end++++++++++++");
     }
 
 }

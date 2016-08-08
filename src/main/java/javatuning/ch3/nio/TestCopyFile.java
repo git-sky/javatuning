@@ -2,6 +2,7 @@ package javatuning.ch3.nio;
 
 import org.junit.Test;
 
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,7 +10,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class TestCopyFile {
-
 
     public static void nioCopyFile(String resource, String destination) throws IOException {
         FileInputStream fis = new FileInputStream(resource);
@@ -32,8 +32,8 @@ public class TestCopyFile {
 
     public static void ioCopyFile(String resource, String destination) throws IOException {
         FileInputStream fis = new FileInputStream(resource);
-        //BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(destination));
-        FileOutputStream fos = new FileOutputStream(destination);
+        BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(destination));
+        //FileOutputStream fos = new FileOutputStream(destination);
         byte[] buffer = new byte[1024 * 8];
         int count = 0;
         while ((count = fis.read(buffer)) != -1) {
@@ -45,15 +45,19 @@ public class TestCopyFile {
 
     @Test
     public void testIoCopyFile() throws IOException {
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < 10; i++)
-            ioCopyFile("filecopy.txt", "filecopy1.txt");
-        System.out.println("ioCopy spend:" + (System.currentTimeMillis() - start));
+        long begTime = System.currentTimeMillis();
+        for (int i = 0; i < 10; i++) {
+            ioCopyFile("./data/file.txt", "./data/file_copy_io.txt");
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println("ioCopy spend:" + (endTime - begTime));
 
-        start = System.currentTimeMillis();
-        for (int i = 0; i < 10; i++)
-            nioCopyFile("filecopy.txt", "filecopy2.txt");
-        System.out.println("nioCopy spend:" + (System.currentTimeMillis() - start));
+        begTime = System.currentTimeMillis();
+        for (int i = 0; i < 10; i++) {
+            nioCopyFile("./data/file.txt", "./data/file_copy_nio.txt");
+        }
+        endTime = System.currentTimeMillis();
+        System.out.println("nioCopy spend:" + (endTime - begTime));
     }
 
 }

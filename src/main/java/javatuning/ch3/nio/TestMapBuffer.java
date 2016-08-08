@@ -18,7 +18,6 @@ public class TestMapBuffer {
 
     protected static int numOfInts = 4000000;
 
-
     @Test
     public void testStreamWrite() throws IOException {
         long starttime = System.currentTimeMillis();
