@@ -20,56 +20,54 @@ public class TestMapBuffer {
 
     @Test
     public void testStreamWrite() throws IOException {
-        long starttime = System.currentTimeMillis();
-        //DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp_stream.tmp"))));
+        long begTime = System.currentTimeMillis();
+        //DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("./data/temp.tmp")), 16 * 1024 * 1024));
+        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("./data/temp_stream.tmp"))));
         for (int i = 0; i < numOfInts; i++) {
             dos.writeInt(i);
         }
         if (dos != null) {
             dos.close();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testStreamWrite:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testStreamWrite:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testStreamRead() throws IOException {
-        long starttime = System.currentTimeMillis();
-        //DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("d:\\temp_stream.tmp"))));
+        long begTime = System.currentTimeMillis();
+        //DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("./data/temp.tmp")), 16 * 1024 * 1024));
+        DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("./data/temp_stream.tmp"))));
         for (int i = 0; i < numOfInts; i++) {
             dis.readInt();
         }
         if (dis != null) {
             dis.close();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testStreamRead:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testStreamRead:" + (endTime - begTime) + "ms");
     }
 
 
     @Test
     public void testMappedWrite() throws IOException {
-        long starttime = System.currentTimeMillis();
-        FileChannel fc = new RandomAccessFile("d:\\temp_mapped.tmp", "rw")
-                .getChannel();
-        IntBuffer ib = fc.map(FileChannel.MapMode.READ_WRITE, 0, numOfInts * 4)
-                .asIntBuffer();
+        long begTime = System.currentTimeMillis();
+        FileChannel fc = new RandomAccessFile("./data/temp_mapped.tmp", "rw").getChannel();
+        IntBuffer ib = fc.map(FileChannel.MapMode.READ_WRITE, 0, numOfInts * 4).asIntBuffer();
         for (int i = 0; i < numOfInts; i++) {
             ib.put(i);
         }
         if (fc != null) {
             fc.close();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testMappedWrite:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testMappedWrite:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testMappedRead() throws IOException {
-        long starttime = System.currentTimeMillis();
-        FileChannel fc = new FileInputStream("d:\\temp_mapped.tmp").getChannel();
+        long begTime = System.currentTimeMillis();
+        FileChannel fc = new FileInputStream("./data/temp_mapped.tmp").getChannel();
         IntBuffer ib = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size()).asIntBuffer();
         while (ib.hasRemaining()) {
             ib.get();
@@ -77,8 +75,8 @@ public class TestMapBuffer {
         if (fc != null) {
             fc.close();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testMappedRead:" + (endtime - starttime) + "ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("testMappedRead:" + (endTime - begTime) + "ms");
     }
 
 }

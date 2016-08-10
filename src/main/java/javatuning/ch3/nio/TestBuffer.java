@@ -114,7 +114,7 @@ public class TestBuffer {
     @Test
     public void testFileMap() throws IOException {
         System.out.println("++++++++++++testFileMap beg++++++++++++");
-        RandomAccessFile raf = new RandomAccessFile("C:\\mapfile.txt", "rw");
+        RandomAccessFile raf = new RandomAccessFile("./data/file.txt", "rw");
         FileChannel fc = raf.getChannel();
 
         MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_WRITE, 0, raf.length());

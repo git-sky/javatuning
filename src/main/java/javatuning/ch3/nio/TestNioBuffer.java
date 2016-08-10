@@ -2,6 +2,8 @@ package javatuning.ch3.nio;
 
 import org.junit.Test;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,8 +30,8 @@ public class TestNioBuffer extends TestMapBuffer {
     @Test
     public void testBufferWrite() throws IOException {
         long begTime = System.currentTimeMillis();
-        // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileOutputStream fos = new FileOutputStream(new File("d:\\temp_buffer.tmp"));
+        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("./data/temp.tmp")), 16 * 1024 * 1024));
+        FileOutputStream fos = new FileOutputStream(new File("./data/temp_buffer.tmp"));
         FileChannel fc = fos.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         for (int i = 0; i < numOfInts; i++) {
@@ -44,8 +46,8 @@ public class TestNioBuffer extends TestMapBuffer {
     @Test
     public void testBufferRead() throws IOException {
         long begTime = System.currentTimeMillis();
-        // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileInputStream fis = new FileInputStream(new File("d:\\temp_buffer.tmp"));
+        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("./data/temp.tmp")), 16 * 1024 * 1024));
+        FileInputStream fis = new FileInputStream(new File("./data/temp_buffer.tmp"));
         FileChannel fc = fis.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         fc.read(byteBuffer);
@@ -61,8 +63,8 @@ public class TestNioBuffer extends TestMapBuffer {
     @Test
     public void testBufferWriteInt() throws IOException {
         long begTime = System.currentTimeMillis();
-        // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileOutputStream fos = new FileOutputStream(new File("d:\\temp_buffer_int.tmp"));
+        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("./data/temp.tmp")), 16 * 1024 * 1024));
+        FileOutputStream fos = new FileOutputStream(new File("./data/temp_buffer_int.tmp"));
         FileChannel fc = fos.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         for (int i = 0; i < numOfInts; i++) {
@@ -77,8 +79,8 @@ public class TestNioBuffer extends TestMapBuffer {
     @Test
     public void testBufferReadInt() throws IOException {
         long begTime = System.currentTimeMillis();
-        // DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("d:\\temp.tmp")),16*1024*1024));
-        FileInputStream fis = new FileInputStream(new File("d:\\temp_buffer_int.tmp"));
+        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File("./data/temp.tmp")), 16 * 1024 * 1024));
+        FileInputStream fis = new FileInputStream(new File("./data/temp_buffer_int.tmp"));
         FileChannel fc = fis.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(numOfInts * 4);
         fc.read(byteBuffer);
