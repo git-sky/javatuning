@@ -7,14 +7,13 @@ import java.nio.ByteBuffer;
 
 public class TestBufferAllocate {
 
-    private void monDirectBuffer()
-            throws ClassNotFoundException, Exception, NoSuchFieldException {
-        Class c = Class.forName("java.nio.Bits");
-        Field maxMemory = c.getDeclaredField("maxMemory");
+    private void monDirectBuffer() throws ClassNotFoundException, Exception, NoSuchFieldException {
+        Class clazz = Class.forName("java.nio.Bits");
+        Field maxMemory = clazz.getDeclaredField("maxMemory");
         maxMemory.setAccessible(true);
-        Field reservedMemory = c.getDeclaredField("reservedMemory");
+        Field reservedMemory = clazz.getDeclaredField("reservedMemory");
         reservedMemory.setAccessible(true);
-        synchronized (c) {
+        synchronized (clazz) {
             Long maxMemoryValue = (Long) maxMemory.get(null);
             Long reservedMemoryValue = (Long) reservedMemory.get(null);
             System.out.println("maxMemoryValue:" + maxMemoryValue);
@@ -24,23 +23,23 @@ public class TestBufferAllocate {
 
     @Test
     public void testDirectAllocate() throws Exception {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 20000; i++) {
             ByteBuffer b = ByteBuffer.allocateDirect(1000);
             monDirectBuffer();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testDirectAllocate:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testDirectAllocate:" + (endTime - begTime));
     }
 
     @Test
     public void testBufferAllocate() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 20000; i++) {
             ByteBuffer b = ByteBuffer.allocate(1000);
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBufferAllocate:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferAllocate:" + (endTime - begTime));
     }
 
 }

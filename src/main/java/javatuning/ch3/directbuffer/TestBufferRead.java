@@ -8,7 +8,7 @@ public class TestBufferRead {
 
     @Test
     public void testDirectWrite() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         ByteBuffer b = ByteBuffer.allocateDirect(500);
         for (int i = 0; i < 100000; i++) {
             for (int j = 0; j < 99; j++)
@@ -18,13 +18,13 @@ public class TestBufferRead {
                 b.getInt();
             b.clear();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testDirectWrite:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testDirectWrite:" + (endTime - begTime));
     }
 
     @Test
     public void testBufferWrite() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         ByteBuffer b = ByteBuffer.allocate(500);
         for (int i = 0; i < 100000; i++) {
             for (int j = 0; j < 99; j++)
@@ -34,8 +34,8 @@ public class TestBufferRead {
                 b.getInt();
             b.clear();
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("testBufferWrite:" + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferWrite:" + (endTime - begTime));
     }
 
 }

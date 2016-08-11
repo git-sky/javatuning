@@ -11,7 +11,7 @@ public class TestBufferBig {
 
     @Test
     public void testDirectWrite() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         ByteBuffer b = ByteBuffer.allocateDirect(3 * 1024 * 1024);
         b = null;
         //System.gc();
@@ -21,7 +21,7 @@ public class TestBufferBig {
 
     @Test
     public void testBufferWrite() {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         ByteBuffer b = ByteBuffer.allocate(1 * 1024 * 1024);
     }
 
