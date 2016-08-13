@@ -12,17 +12,17 @@ public class TestStaticMethod {
 
     @Test
     public void test() {
-        int CIRCLE = 100000000;
+        long CIRCLE = 100000000000L;
 
         long begTime = System.currentTimeMillis();
-        for (int i = 0; i < CIRCLE; i++) {
+        for (long i = 0; i < CIRCLE; i++) {
             staticMethod();
         }
         long endTime = System.currentTimeMillis();
         System.out.println("staticMethod:" + (endTime - begTime) + "ms");
 
         begTime = System.currentTimeMillis();
-        for (int i = 0; i < CIRCLE; i++) {
+        for (long i = 0; i < CIRCLE; i++) {
             instanceMethod();
         }
         endTime = System.currentTimeMillis();

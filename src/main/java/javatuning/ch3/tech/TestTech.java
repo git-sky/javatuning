@@ -132,7 +132,7 @@ public class TestTech {
     public void testIfelseInt() {
         long begTime = System.currentTimeMillis();
         int re = 0;
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 1000000000; i++) {
             re = ifelseInt(i);
         }
         long endTime = System.currentTimeMillis();
@@ -143,7 +143,7 @@ public class TestTech {
     public void testSwitchInt() {
         long begTime = System.currentTimeMillis();
         int re = 0;
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 1000000000; i++) {
             re = switchInt(i);
         }
         long endTime = System.currentTimeMillis();
@@ -155,7 +155,7 @@ public class TestTech {
         long begTime = System.currentTimeMillis();
         int re = 0;
         int[] sw = new int[]{0, 3, 6, 7, 8, 10, 16, 18, 44};
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 1000000000; i++) {
             re = arrayInt(sw, i);
         }
         long endTime = System.currentTimeMillis();
@@ -236,7 +236,7 @@ public class TestTech {
             array[i] = i;
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testNormaCircle:" + (endTime - begTime) + " " + array[9999998]);
+        System.out.println("testNormaCircle:" + (endTime - begTime) + "ms " + array[9999998]);
     }
 
     @Test
@@ -249,7 +249,7 @@ public class TestTech {
             array[i + 2] = i + 2;
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("testExpandCircle:" + (endTime - begTime) + " " + array[9999998]);
+        System.out.println("testExpandCircle:" + (endTime - begTime) + "ms " + array[9999998]);
     }
 
     @Test
@@ -291,7 +291,7 @@ public class TestTech {
             for (int i = 0; i < size; i++)
                 arrayDest[i] = array[i];
         long endTime = System.currentTimeMillis();
-        System.out.println("testArrayCopyNormal:" + (endTime - begTime) + " last:" + arrayDest[size - 1]);
+        System.out.println("testArrayCopyNormal:" + (endTime - begTime) + "ms last:" + arrayDest[size - 1]);
     }
 
     @Test
@@ -306,7 +306,7 @@ public class TestTech {
         for (int k = 0; k < 1000; k++)
             System.arraycopy(array, 0, arrayDest, 0, size);
         long endTime = System.currentTimeMillis();
-        System.out.println("testArrayCopySystem:" + (endTime - begTime) + " last:" + arrayDest[size - 1]);
+        System.out.println("testArrayCopySystem:" + (endTime - begTime) + "ms last:" + arrayDest[size - 1]);
     }
 
 }

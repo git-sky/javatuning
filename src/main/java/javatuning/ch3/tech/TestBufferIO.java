@@ -16,84 +16,90 @@ import java.io.IOException;
 
 public class TestBufferIO {
 
-    public static int count = 10000;
+    public static int count = 1000000;
 
     @Test
     public void testStream() throws IOException {
-        DataOutputStream dos = new DataOutputStream(new FileOutputStream("testfile.txt"));
+        DataOutputStream dos = new DataOutputStream(
+                new FileOutputStream("./data/testfile.txt"));
 
         long begTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             dos.writeBytes(String.valueOf(i) + "\r\n");
         dos.close();
         long endTime = System.currentTimeMillis();
-        System.out.println("testStream write file cost:" + (endTime - begTime));
+        System.out.println("testStream write file cost:" + (endTime - begTime) + "ms");
 
-        DataInputStream dis = new DataInputStream(new FileInputStream("testfile.txt"));
+        DataInputStream dis = new DataInputStream(
+                new FileInputStream("./data/testfile.txt"));
 
         begTime = System.currentTimeMillis();
         while (dis.readLine() != null) ;
         dis.close();
         endTime = System.currentTimeMillis();
-        System.out.println("testStream read file cost:" + (endTime - begTime));
+        System.out.println("testStream read file cost:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testBufferedStream() throws IOException {
-        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("testfile.txt")));
+        DataOutputStream dos = new DataOutputStream(
+                new BufferedOutputStream(new FileOutputStream("./data/testfile.txt")));
 
         long begTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             dos.writeBytes(String.valueOf(i) + "\r\n");
         dos.close();
         long endTime = System.currentTimeMillis();
-        System.out.println("testBufferedStream write file cost:" + (endTime - begTime));
+        System.out.println("testBufferedStream write file cost:" + (endTime - begTime) + "ms");
 
-        DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream("testfile.txt")));
+        DataInputStream dis = new DataInputStream(
+                new BufferedInputStream(new FileInputStream("./data/testfile.txt")));
 
         begTime = System.currentTimeMillis();
         while (dis.readLine() != null) ;
         dis.close();
         endTime = System.currentTimeMillis();
-        System.out.println("testBufferedStream read file cost:" + (endTime - begTime));
+        System.out.println("testBufferedStream read file cost:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testReaderWriter() throws IOException {
-        FileWriter fw = new FileWriter("testfile.txt");
+        FileWriter fw = new FileWriter("./data/testfile.txt");
 
         long begTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             fw.write(String.valueOf(i) + "\r\n");
         fw.close();
         long endTime = System.currentTimeMillis();
-        System.out.println("testReaderWriter write file cost:" + (endTime - begTime));
+        System.out.println("testReaderWriter write file cost:" + (endTime - begTime) + "ms");
 
-        FileReader fr = new FileReader("testfile.txt");
+        FileReader fr = new FileReader("./data/testfile.txt");
 
         begTime = System.currentTimeMillis();
         while (fr.read() != -1) ;
         fr.close();
         endTime = System.currentTimeMillis();
-        System.out.println("testReaderWriter read file cost:" + (endTime - begTime));
+        System.out.println("testReaderWriter read file cost:" + (endTime - begTime) + "ms");
     }
 
     @Test
     public void testBufferedReaderWriter() throws IOException {
-        BufferedWriter fw = new BufferedWriter(new FileWriter("testfile.txt"));
+        BufferedWriter fw = new BufferedWriter(new FileWriter("./data/testfile.txt"));
 
-        long start = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < count; i++)
             fw.write(String.valueOf(i) + "\r\n");
         fw.close();
-        System.out.println("testBufferedReaderWriter write file cost:" + (System.currentTimeMillis() - start));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testBufferedReaderWriter write file cost:" + (endTime - begTime) + "ms");
 
-        BufferedReader fr = new BufferedReader(new FileReader("testfile.txt"));
+        BufferedReader fr = new BufferedReader(new FileReader("./data/testfile.txt"));
 
-        start = System.currentTimeMillis();
+        begTime = System.currentTimeMillis();
         while (fr.read() != -1) ;
         fr.close();
-        System.out.println("testBufferedReaderWriter read file cost:" + (System.currentTimeMillis() - start));
+        endTime = System.currentTimeMillis();
+        System.out.println("testBufferedReaderWriter read file cost:" + (endTime - begTime) + "ms");
     }
 
 }
