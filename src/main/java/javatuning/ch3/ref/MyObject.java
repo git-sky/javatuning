@@ -13,4 +13,9 @@ public class MyObject {
         return "I am MyObject";
     }
 
+    @Deprecated
+    public static void main(String[] args) {
+        System.out.println(new MyObject());
+    }
+
 }

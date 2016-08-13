@@ -44,10 +44,10 @@ public class TestPhantomRefFinalize {
         map.put(phantomRef, "db resource");
         new CheckRefQueue().start();
         obj = null;
-        Thread.sleep(1000);
+        Thread.sleep(10);
         int i = 1;
         while (true) {
-            System.out.println("��" + i++ + "��gc");
+            System.out.println("第" + i++ + "次gc");
             System.gc();
             Thread.sleep(1000);
         }

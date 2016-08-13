@@ -23,7 +23,6 @@ public class TestAllRef {
             this.queueName = queueName;
         }
 
-        @SuppressWarnings("unchecked")
         @Override
         public void run() {
             while (true) {
@@ -34,8 +33,7 @@ public class TestAllRef {
                     e.printStackTrace();
                 }
                 if (obj != null)
-                    System.out.println("Object for " + queueName + " is "
-                            + obj.get());
+                    System.out.println("Object for " + queueName + " is " + obj.get());
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -67,7 +65,7 @@ public class TestAllRef {
         System.out.println("After GC:Soft Get= " + softRef.get());
         System.out.println("After GC:weak Get= " + weakRef.get());
         System.out.println("After GC:phantom Get= " + phantomRef.get());
-        System.out.println("���ڴ����");
+        System.out.println("分配大块内存");
         byte[] b = new byte[4 * 1024 * 925];
         System.out.println("After GC:Soft Get= " + softRef.get());
         System.out.println("After GC:weak Get= " + weakRef.get());

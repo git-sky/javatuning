@@ -7,12 +7,14 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 
+/**
+ * -Xmx5M
+ */
 public class TestSoftRef {
 
     ReferenceQueue<MyObject> softQueue = null;
 
     public class CheckRefQueue extends Thread {
-        @SuppressWarnings("unchecked")
         @Override
         public void run() {
             while (true) {
@@ -51,12 +53,12 @@ public class TestSoftRef {
         obj = null;
         System.gc();
         System.out.println("After GC:Soft Get= " + softRef.get());
-        System.out.println("�������ڴ�");
-        byte[] b = new byte[4 * 1024 * 925];
+        System.out.println("分配大块内存");
+        byte[] b = new byte[5 * 1024 * 900];
         System.out.println("After new byte[]:Soft Get= " + softRef.get());
     }
 
-    //@Test
+    @Test
     public void testSimple() throws InterruptedException {
         MyObject obj = new MyObject();
 
@@ -65,7 +67,7 @@ public class TestSoftRef {
         System.out.println("Soft Get: " + softRef.get());
         System.gc();
         System.out.println("Soft Get: " + softRef.get());
-        byte[] b = new byte[4 * 1024 * 925];
+        byte[] b = new byte[5 * 1024 * 880];
         System.out.println("Soft Get: " + softRef.get());
     }
 

@@ -11,7 +11,6 @@ public class TestPhantomRef {
     ReferenceQueue<MyObject> phantomQueue = null;
 
     public class CheckRefQueue extends Thread {
-
         @Override
         public void run() {
             while (true) {
@@ -46,7 +45,7 @@ public class TestPhantomRef {
 
         int i = 1;
         while (true) {
-            System.out.println("��" + i++ + "��gc");
+            System.out.println("第" + i++ + "次gc");
             System.gc();
             Thread.sleep(1000);
         }
