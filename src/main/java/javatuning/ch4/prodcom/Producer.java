@@ -7,27 +7,29 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Producer implements Runnable {
 
+    private static final int SLEEP_TIME = 1000;
+
     private volatile boolean isRunning = true;
-    private BlockingQueue<PCData> queue;
-    private static AtomicInteger count = new AtomicInteger();
-    private static final int SLEEPTIME = 1000;
+
+    private static AtomicInteger count = new AtomicInteger(); //总数,原子操作
+    private BlockingQueue<PCData> queue; //内存缓冲区
 
     public Producer(BlockingQueue<PCData> queue) {
         this.queue = queue;
     }
 
+    @Override
     public void run() {
         PCData data = null;
         Random r = new Random();
-
         System.out.println("start producer id=" + Thread.currentThread().getId());
         try {
             while (isRunning) {
-                Thread.sleep(r.nextInt(SLEEPTIME));
-                data = new PCData(count.incrementAndGet());
+                Thread.sleep(r.nextInt(SLEEP_TIME));
+                data = new PCData(count.incrementAndGet()); //构造任务数据
                 System.out.println(data + " is put into queue");
                 if (!queue.offer(data, 2, TimeUnit.SECONDS)) {
-                    System.err.println("failed to put data��" + data);
+                    System.err.println("failed to put data: " + data);
                 }
             }
         } catch (InterruptedException e) {
