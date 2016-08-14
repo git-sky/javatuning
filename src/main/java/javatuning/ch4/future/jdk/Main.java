@@ -8,18 +8,16 @@ import java.util.concurrent.FutureTask;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-
         FutureTask<String> future = new FutureTask<String>(new RealData("a"));
         ExecutorService executor = Executors.newFixedThreadPool(1);
-
         executor.submit(future);
-        System.out.println("�������");
+        System.out.println("请求完毕");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("��� = " + future.get());
+        System.out.println("数据 = " + future.get());
     }
 
 }

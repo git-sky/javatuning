@@ -5,7 +5,7 @@ public class RealData implements Data {
     protected final String result;
 
     public RealData(String para) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 10; i++) {
             sb.append(para);
             try {
@@ -17,6 +17,7 @@ public class RealData implements Data {
         result = sb.toString();
     }
 
+    @Override
     public String getResult() {
         return result;
     }

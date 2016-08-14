@@ -2,14 +2,15 @@ package javatuning.ch4.future.pattern;
 
 public class FutureData implements Data {
 
-    protected RealData realdata = null;
+    protected RealData realData = null;
+
     protected boolean isReady = false;
 
-    public synchronized void setRealData(RealData realdata) {
+    public synchronized void setRealData(RealData realData) {
         if (isReady) {
             return;
         }
-        this.realdata = realdata;
+        this.realData = realData;
         isReady = true;
         notifyAll();
     }
@@ -22,7 +23,7 @@ public class FutureData implements Data {
                 e.printStackTrace();
             }
         }
-        return realdata.result;
+        return realData.result;
     }
 
 }

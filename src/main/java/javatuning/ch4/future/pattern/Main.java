@@ -6,13 +6,13 @@ public class Main {
         Client client = new Client();
 
         Data data = client.request("a");
-        System.out.println("�������");
+        System.out.println("请求完毕");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("��� = " + data.getResult());
+        System.out.println("数据 = " + data.getResult());
     }
 
 }
