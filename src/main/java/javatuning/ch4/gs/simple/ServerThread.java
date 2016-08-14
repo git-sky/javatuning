@@ -1,6 +1,5 @@
 package javatuning.ch4.gs.simple;
 
-
 public class ServerThread extends Thread {
 
     private RequestQueue requestQueue;
@@ -19,7 +18,6 @@ public class ServerThread extends Thread {
                 e.printStackTrace();
             }
             System.out.println(Thread.currentThread().getName() + " handles  " + request);
-
         }
     }
 

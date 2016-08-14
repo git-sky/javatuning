@@ -13,6 +13,7 @@ public class ServerThread extends Thread {
         this.requestQueue = requestQueue;
     }
 
+    @Override
     public void run() {
         while (true) {
             final Request request = requestQueue.getRequest();

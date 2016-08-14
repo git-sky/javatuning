@@ -9,16 +9,17 @@ public class RequestQueue {
     public synchronized Request getRequest() {
         while (queue.size() == 0) {
             try {
-                wait();
+                wait(); //等待直到有新的Request加入
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        return (Request) queue.remove();
+        return (Request) queue.remove(); //返回Request队列中的第一个请求
     }
 
     public synchronized void addRequest(Request request) {
-        queue.add(request);
-        notifyAll();
+        queue.add(request); //加入新的Request请求
+        notifyAll();        //通知getRequest()方法
     }
+
 }

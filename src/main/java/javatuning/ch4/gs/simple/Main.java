@@ -1,6 +1,5 @@
 package javatuning.ch4.gs.simple;
 
-
 public class Main {
 
     public static void main(String[] args) {
