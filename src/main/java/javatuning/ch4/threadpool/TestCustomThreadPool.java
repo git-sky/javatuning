@@ -2,6 +2,7 @@ package javatuning.ch4.threadpool;
 
 import org.junit.Test;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
@@ -24,7 +25,7 @@ public class TestCustomThreadPool {
         public void run() {
             try {
                 Thread.sleep(100);
-                System.out.println(name + " in run" + " " + Thread.currentThread().getId());
+                System.out.println(name + " in run " + Thread.currentThread().getId());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -34,7 +35,6 @@ public class TestCustomThreadPool {
             return name;
         }
     }
-
 
     public class MyThreadPoolExecutor extends ThreadPoolExecutor {
         public MyThreadPoolExecutor(int corePoolSize,
@@ -55,33 +55,33 @@ public class TestCustomThreadPool {
         }
     }
 
-
     @Test
     public void testThreadPoolExecutor1() throws InterruptedException {
 
-        long starttime = System.currentTimeMillis();
-        /*
-        ExecutorService exe = new MyThreadPoolExecutor(
+        long begTime = System.currentTimeMillis();
+
+        ExecutorService es = new MyThreadPoolExecutor(
                 100,
                 600,
                 0L,
                 TimeUnit.SECONDS,
                 new ArrayBlockingQueue<Runnable>(200));
-        */
-        ExecutorService exe = new MyThreadPoolExecutor(
+        /*
+        ExecutorService es = new MyThreadPoolExecutor(
                 0,
                 Integer.MAX_VALUE,
                 60L,
                 TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>());
+        */
         for (int i = 0; i < 1000; i++) {
-            exe.execute(new MyThread("testThreadPoolExecutor1_" + Integer.toString(i)));
+            es.execute(new MyThread("testThreadPoolExecutor_" + Integer.toString(i)));
         }
         System.out.println();
-        long endtime = System.currentTimeMillis();
-        System.out.println("testThreadPoolExecutor1" + ": " + (endtime - starttime));
-        System.out.println("testThreadPoolExecutor1 exe size" + ": " + ((ThreadPoolExecutor) exe).getPoolSize());
-        Thread.sleep(1000 * 101);
+        long endTime = System.currentTimeMillis();
+        System.out.println("testThreadPoolExecutor: " + (endTime - begTime) + "ms");
+        System.out.println("testThreadPoolExecutor es size: " + ((ThreadPoolExecutor) es).getPoolSize());
+        Thread.sleep(1000 * 10);
     }
 
 }

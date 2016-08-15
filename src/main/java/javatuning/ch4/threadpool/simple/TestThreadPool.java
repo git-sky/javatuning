@@ -31,40 +31,38 @@ public class TestThreadPool {
 
     @Test
     public void testThreadPool() throws InterruptedException {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 1000; i++) {
             ThreadPool.getInstance().start(new MyThread("testThreadPool" + Integer.toString(i)));
         }
-
-        long endtime = System.currentTimeMillis();
-        System.out.println("testThreadPool" + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testThreadPool" + ": " + (endTime - begTime) + "ms");
         System.out.println("getCreatedThreadsCount:" + ThreadPool.getInstance().getCreatedThreadsCount());
         Thread.sleep(1000);
     }
 
     @Test
     public void testJDKThreadPool() throws InterruptedException {
-        long starttime = System.currentTimeMillis();
         ExecutorService exe = Executors.newCachedThreadPool();
+
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 1000; i++) {
             exe.execute(new MyThread("testJDKThreadPool" + Integer.toString(i)));
         }
-        System.out.println();
-        long endtime = System.currentTimeMillis();
-        System.out.println("testJDKThreadPool" + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testJDKThreadPool" + ": " + (endTime - begTime) + "ms");
         System.out.println("newCachedThreadPool size:" + ((ThreadPoolExecutor) exe).getPoolSize());
         Thread.sleep(1000);
     }
 
     @Test
     public void testNoThreadPool() throws InterruptedException {
-        long starttime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < 1000; i++) {
             new Thread(new MyThread("testNoThreadPool" + Integer.toString(i))).start();
         }
-        System.out.println();
-        long endtime = System.currentTimeMillis();
-        System.out.println("testNoThreadPool" + ": " + (endtime - starttime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("testNoThreadPool" + ": " + (endTime - begTime) + "ms");
         Thread.sleep(1000);
     }
 
