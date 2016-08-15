@@ -24,7 +24,7 @@ public class TestThreadPool {
         @Override
         public void run() {
             try {
-                Thread.sleep(100);
+                Thread.sleep(100); //模拟工作任务
                 System.out.println("running " + name);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -32,8 +32,8 @@ public class TestThreadPool {
         }
 
         @Override
-        public int compareTo(MyThread o) {
-            int me = Integer.parseInt(this.name.split("_")[1]);
+        public int compareTo(MyThread o) { //比较任务的优先级
+            int me = Integer.parseInt(this.name.split("_")[1]); //线程名称中标注任务优先级
             int other = Integer.parseInt(o.name.split("_")[1]);
             if (me > other) return 1;
             else if (me < other) return -1;
