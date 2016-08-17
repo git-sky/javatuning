@@ -4,11 +4,12 @@ import org.junit.Test;
 
 public class VolatileTest {
 
-    volatile boolean isExit;
+    private volatile boolean isExit;
 
     public void tryExit() {
-        if (isExit == !isExit)
+        if (isExit == !isExit) {
             System.exit(0);
+        }
     }
 
     public void swapValue() {
@@ -18,7 +19,9 @@ public class VolatileTest {
     @Test
     public void test() throws InterruptedException {
         final VolatileTest volObj = new VolatileTest();
+
         Thread mainThread = new Thread() {
+            @Override
             public void run() {
                 System.out.println("mainThread start");
                 while (true) {
@@ -27,7 +30,9 @@ public class VolatileTest {
             }
         };
         mainThread.start();
+
         Thread swapThread = new Thread() {
+            @Override
             public void run() {
                 System.out.println("swapThread start");
                 while (true) {
@@ -36,7 +41,8 @@ public class VolatileTest {
             }
         };
         swapThread.start();
-        Thread.sleep(10000);
+
+        Thread.sleep(1000);
     }
 
 }
