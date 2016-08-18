@@ -1,8 +1,10 @@
 package javatuning.ch4.sync;
 
+import java.util.Random;
+
 public class TestBlockQueue {
 
-    static BlockQueue queue = new BlockQueue();
+    private static BlockQueue queue = new BlockQueue();
 
     public static class PutThread extends Thread {
         @Override
@@ -15,7 +17,7 @@ public class TestBlockQueue {
                 System.out.println(System.currentTimeMillis() + ":"
                         + Thread.currentThread().getName() + " PUT OBJECT");
                 try {
-                    Thread.sleep(new java.util.Random().nextInt(2000));
+                    Thread.sleep(new Random().nextInt(2000));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -31,15 +33,15 @@ public class TestBlockQueue {
             while (true) {
                 try {
                     Object obj = queue.pop();
-                    if (obj != null)
+                    if (obj != null) {
                         System.out.println(System.currentTimeMillis() + ":"
-                                + Thread.currentThread().getName()
-                                + " Get Object");
-                    else
+                                + Thread.currentThread().getName() + " Get Object");
+                    } else {
                         System.out.println(System.currentTimeMillis() + ":"
                                 + Thread.currentThread().getName()
                                 + " Get NULL");
-                    Thread.sleep(new java.util.Random().nextInt(1000));
+                    }
+                    Thread.sleep(new Random().nextInt(1000));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -47,14 +49,18 @@ public class TestBlockQueue {
         }
     }
 
+    @Deprecated
     public static void main(String args[]) throws InterruptedException {
         PopThread pop1 = new PopThread();
         pop1.setName("POP_Thread_1");
         pop1.start();
+
         PopThread pop2 = new PopThread();
         pop2.setName("POP_Thread_2");
         pop2.start();
+
         Thread.sleep(1000);
+
         PutThread put = new PutThread();
         put.setName("Put_Thread");
         put.start();
