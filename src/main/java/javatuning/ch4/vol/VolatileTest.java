@@ -5,6 +5,7 @@ import org.junit.Test;
 public class VolatileTest {
 
     private volatile boolean isExit;
+    //private boolean isExit;
 
     public void tryExit() {
         if (isExit == !isExit) {
@@ -24,7 +25,9 @@ public class VolatileTest {
             @Override
             public void run() {
                 System.out.println("mainThread start");
+                int i = 0;
                 while (true) {
+                    System.out.println("mainThread " + i++);
                     volObj.tryExit();
                 }
             }

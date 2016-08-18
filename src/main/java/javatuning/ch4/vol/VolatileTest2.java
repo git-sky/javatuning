@@ -53,8 +53,8 @@ public class VolatileTest2 {
     }
 
     static class Control {
-        private volatile boolean isExit;
-        //private boolean isExit;
+        //private volatile boolean isExit;
+        private boolean isExit;
 
         public void tryExit() {
             if (isExit == !isExit) {
