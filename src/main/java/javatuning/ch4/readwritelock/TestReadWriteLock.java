@@ -2,6 +2,7 @@ package javatuning.ch4.readwritelock;
 
 import org.junit.Test;
 
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -15,84 +16,15 @@ public class TestReadWriteLock {
 
     private static final int MAX_THREADS = 2000;
     private static final int TASK_COUNT = 4000;
+
     private static Lock lock = new ReentrantLock();
     private static ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private static Lock readLock = readWriteLock.readLock();
     private static Lock writeLock = readWriteLock.writeLock();
 
-    java.util.Random rand = new java.util.Random();
+    private Random rand = new Random();
 
     private int value;
-
-    public class ReadWriteThread implements Runnable {
-        protected String name;
-
-        public ReadWriteThread() {
-        }
-
-        public ReadWriteThread(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public void run() {
-            try {
-                handleRead();
-                int v = rand.nextInt(100);
-                if (v < 10)
-                    handleWrite(v);
-                Thread.sleep(rand.nextInt(100));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public class ReadWriteThread2 implements Runnable {
-        protected String name;
-
-        public ReadWriteThread2() {
-        }
-
-        public ReadWriteThread2(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public void run() {
-            try {
-                handleRead2();
-                int v = rand.nextInt(100);
-                if (v < 10)
-                    handleWrite2(v);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    public class CounterPoolExecutor extends ThreadPoolExecutor {
-        private AtomicInteger count = new AtomicInteger(0);
-        public long startTime = 0;
-        public String funcname = "";
-
-        public CounterPoolExecutor(int corePoolSize,
-                                   int maximumPoolSize,
-                                   long keepAliveTime,
-                                   TimeUnit unit,
-                                   BlockingQueue<Runnable> workQueue) {
-            super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
-        }
-
-        protected void afterExecute(Runnable r, Throwable t) {
-            int l = count.addAndGet(1);
-            if (l == TASK_COUNT) {
-                System.out.println(funcname + " spend time:" + (System.currentTimeMillis() - startTime));
-            }
-        }
-    }
-
 
     public Object handleRead() throws InterruptedException {
         try {
@@ -134,40 +66,110 @@ public class TestReadWriteLock {
         }
     }
 
-    @Test
-    public void testLock() throws InterruptedException {
 
-        CounterPoolExecutor exe = new CounterPoolExecutor(
-                MAX_THREADS,
-                MAX_THREADS,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>());
+    public class ReadWriteTask1 implements Runnable {
+        protected String name;
 
-        long starttime = System.currentTimeMillis();
-        exe.startTime = starttime;
-        exe.funcname = "testLock";
-        for (int i = 0; i < TASK_COUNT; i++)
-            exe.submit(new ReadWriteThread());
+        public ReadWriteTask1() {
+        }
 
-        Thread.sleep(100000);
+        public ReadWriteTask1(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            try {
+                handleRead();
+                int v = rand.nextInt(100);
+                if (v < 10) {
+                    handleWrite(v);
+                }
+                Thread.sleep(rand.nextInt(100));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    //@Test
-    public void testLock2() throws InterruptedException {
 
+    public class ReadWriteTask2 implements Runnable {
+        protected String name;
+
+        public ReadWriteTask2() {
+        }
+
+        public ReadWriteTask2(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            try {
+                handleRead2();
+                int v = rand.nextInt(100);
+                if (v < 10) {
+                    handleWrite2(v);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public class CounterPoolExecutor extends ThreadPoolExecutor {
+        private AtomicInteger count = new AtomicInteger(0);
+        public long startTime = 0;
+        public String funcName = "";
+
+        public CounterPoolExecutor(int corePoolSize,
+                                   int maximumPoolSize,
+                                   long keepAliveTime,
+                                   TimeUnit unit,
+                                   BlockingQueue<Runnable> workQueue) {
+            super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
+        }
+
+        protected void afterExecute(Runnable r, Throwable t) {
+            int l = count.addAndGet(1);
+            if (l == TASK_COUNT) {
+                System.out.println(funcName + " spend time:" + (System.currentTimeMillis() - startTime));
+            }
+        }
+    }
+
+
+    @Test
+    public void testLock() throws InterruptedException {
         CounterPoolExecutor exe = new CounterPoolExecutor(
                 MAX_THREADS,
                 MAX_THREADS,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<Runnable>());
 
-        long starttime = System.currentTimeMillis();
-        exe.startTime = starttime;
-        exe.funcname = "testLock2";
-        for (int i = 0; i < TASK_COUNT; i++)
-            exe.submit(new ReadWriteThread2());
+        exe.startTime = System.currentTimeMillis();
+        exe.funcName = "testLock";
+        for (int i = 0; i < TASK_COUNT; i++) {
+            exe.submit(new ReadWriteTask1());
+        }
+        Thread.sleep(10000);
+    }
 
-        Thread.sleep(100000);
+    @Test
+    public void testLock2() throws InterruptedException {
+        CounterPoolExecutor exe = new CounterPoolExecutor(
+                MAX_THREADS,
+                MAX_THREADS,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
+
+        exe.startTime = System.currentTimeMillis();
+        exe.funcName = "testLock2";
+        for (int i = 0; i < TASK_COUNT; i++) {
+            exe.submit(new ReadWriteTask2());
+        }
+        Thread.sleep(10000);
     }
 
 }
