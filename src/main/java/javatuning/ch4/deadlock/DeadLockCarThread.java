@@ -2,15 +2,16 @@ package javatuning.ch4.deadlock;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class DeadLockCar extends Thread {
+public class DeadLockCarThread extends Thread {
 
     protected Object myDirect;
+
     static ReentrantLock south = new ReentrantLock();
     static ReentrantLock north = new ReentrantLock();
     static ReentrantLock west = new ReentrantLock();
     static ReentrantLock east = new ReentrantLock();
 
-    public DeadLockCar(Object obj) {
+    public DeadLockCarThread(Object obj) {
         this.myDirect = obj;
         if (myDirect == south) {
             this.setName("south");
@@ -106,19 +107,21 @@ public class DeadLockCar extends Thread {
                 if (east.isHeldByCurrentThread())
                     east.unlock();
             }
-
         }
     }
 
+    @Deprecated
     public static void main(String[] args) throws InterruptedException {
-        DeadLockCar car2south = new DeadLockCar(south);
-        DeadLockCar car2north = new DeadLockCar(north);
-        DeadLockCar car2west = new DeadLockCar(west);
-        DeadLockCar car2east = new DeadLockCar(east);
+        DeadLockCarThread car2south = new DeadLockCarThread(south);
+        DeadLockCarThread car2north = new DeadLockCarThread(north);
+        DeadLockCarThread car2west = new DeadLockCarThread(west);
+        DeadLockCarThread car2east = new DeadLockCarThread(east);
+
         car2south.start();
         car2north.start();
         car2west.start();
         car2east.start();
+
         Thread.sleep(1000);
         car2north.interrupt();
     }
