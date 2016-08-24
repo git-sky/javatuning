@@ -15,10 +15,10 @@ public class TestMasterWorker {
     public class Pow3 implements Doable<Integer, Integer> {
         @Override
         public Integer run(Integer input) {
-
             return input * input * input;
         }
     }
+
 
     public class Pow3Dyn implements DynamicWorker<Integer, Integer> {
         @Override
@@ -26,6 +26,7 @@ public class TestMasterWorker {
             return w * w * w;
         }
     }
+
 
     @Test
     public void testStatic() {
@@ -51,11 +52,13 @@ public class TestMasterWorker {
     public void testDynamic() {
         MasterWorker<Integer, Integer> mw = MasterWorkerFactory.newDynamic(new Pow3Dyn());
         List<MasterWorker.ResultKey> keyList = new Vector<MasterWorker.ResultKey>();
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++) {
             keyList.add(mw.submit(i));
+        }
         mw.execute();
-        for (int i = 50; i < 100; i++)
+        for (int i = 50; i < 100; i++) {
             keyList.add(mw.submit(i));
+        }
         int re = 0;
         while (keyList.size() > 0) {
             MasterWorker.ResultKey k = keyList.get(0);
