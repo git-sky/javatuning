@@ -10,24 +10,24 @@ public class TestSyncObject {
 
     @Test
     public void test() {
-        long begintime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         for (int i = 0; i < CIRCLE; i++) {
             synchronized (lock) {
             }
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("sync in loop:" + (endtime - begintime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("sync in loop:" + (endTime - begTime));
     }
 
     @Test
     public void test1() {
-        long begintime = System.currentTimeMillis();
+        long begTime = System.currentTimeMillis();
         synchronized (lock) {
             for (int i = 0; i < CIRCLE; i++) {
             }
         }
-        long endtime = System.currentTimeMillis();
-        System.out.println("sync out loop:" + (endtime - begintime));
+        long endTime = System.currentTimeMillis();
+        System.out.println("sync out loop:" + (endTime - begTime));
     }
 
     public void demoMethod() {
